@@ -326,6 +326,22 @@ body {
     font-size: 18px;
 }
 
+/* Biến thẻ <a> thành một khối (block) để nó bao bọc div.ticket-item */
+.ticket-link {
+    display: block;
+    text-decoration: none;
+    /* Loại bỏ gạch chân mặc định của link */
+    color: inherit;
+    /* Giữ màu chữ không bị đổi thành màu xanh mặc định của link */
+    /* Quan trọng: margin/padding được giữ nguyên cho .ticket-item */
+}
+
+/* Nếu cần thêm hiệu ứng khi di chuột (hover) */
+.ticket-link:hover .ticket-item {
+    /* Ví dụ: thay đổi màu nền khi hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Ví dụ: thêm bóng mờ */
+}
 .android-nav-bar span {
     cursor: pointer;
 }
