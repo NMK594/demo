@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vé sự kiện - Carousel</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="stylectv.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="phone-frame">
+      <div class="app-container">
+        <header class="app-header">
+          <div class="status-bar">
+            <span class="phone-close-icon">&times;</span>
+            <span class="time-status">1:04</span>
+            <div class="battery-group">
+              <span>27</span>
+            </div>
+          </div>
+          <div class="header-title-container">
+            <h1 class="header-title">My Tickets</h1>
+          </div>
+        </header>
+
+        <div class="ticket-content-wrapper">
+          <div class="carousel-wrapper">
+            <button class="nav-button prev-button">&lt;</button>
+
+            <div class="carousel-container">
+              <div class="ticket-card ticket-1">
+                <p class="section-title">Seating</p>
+                <div class="seating-info">
+                  <div class="info-item">
+                    <span class="label">SEC</span><span class="value">C</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="label">ROW</span><span class="value">4</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="label">SEAT</span><span class="value">78</span>
+                  </div>
+                </div>
+                <div class="ticket-image-container">
+                  <div class="ticket-image">
+                    <div class="color-overlay overlay-1"></div>
+                    <div class="artist-image image-1"></div>
+                  </div>
+                  <div class="event-details">
+                    <p class="artist-name">TV GIRL</p>
+                    <p class="event-time-location">
+                      Thur Aug, 15 - 6:30 PM - 3Arena, Dublin
+                    </p>
+                  </div>
+                </div>
+                <div class="ticket-actions">
+                  <a href="#" class="action-link">View Barcode</a>
+                  <a href="#" class="action-link">Ticket Details</a>
+                </div>
+                <div class="ticket-verified">
+                  <span class="verified-text">ticketmaster.verified</span>
+                </div>
+              </div>
+
+              <div class="ticket-card ticket-2">
+                <p class="section-title">Seating</p>
+                <div class="seating-info">
+                  <div class="info-item">
+                    <span class="label">SEC</span><span class="value">A</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="label">ROW</span><span class="value">12</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="label">SEAT</span><span class="value">30</span>
+                  </div>
+                </div>
+                <div class="ticket-image-container">
+                  <div class="ticket-image">
+                    <div class="color-overlay overlay-2"></div>
+                    <div class="artist-image image-2"></div>
+                  </div>
+                  <div class="event-details">
+                    <p class="artist-name">BLUR</p>
+                    <p class="event-time-location">
+                      Sat Sept, 28 - 7:00 PM - Aviva Stadium
+                    </p>
+                  </div>
+                </div>
+                <div class="ticket-actions">
+                  <a href="#" class="action-link">View Barcode</a>
+                  <a href="#" class="action-link">Ticket Details</a>
+                </div>
+                <div class="ticket-verified">
+                  <span class="verified-text">ticketmaster.verified</span>
+                </div>
+              </div>
+
+              <div class="ticket-card ticket-3">
+                <p class="section-title">Seating</p>
+                <div class="seating-info">
+                  <div class="info-item">
+                    <span class="label">SEC</span><span class="value">D</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="label">ROW</span><span class="value">8</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="label">SEAT</span
+                    ><span class="value">150</span>
+                  </div>
+                </div>
+                <div class="ticket-image-container">
+                  <div class="ticket-image">
+                    <div class="color-overlay overlay-3"></div>
+                    <div class="artist-image image-3"></div>
+                  </div>
+                  <div class="event-details">
+                    <p class="artist-name">COLDPLAY</p>
+                    <p class="event-time-location">
+                      Fri Dec, 6 - 8:00 PM - Croke Park
+                    </p>
+                  </div>
+                </div>
+                <div class="ticket-actions">
+                  <a href="#" class="action-link">View Barcode</a>
+                  <a href="#" class="action-link">Ticket Details</a>
+                </div>
+                <div class="ticket-verified">
+                  <span class="verified-text">ticketmaster.verified</span>
+                </div>
+              </div>
+            </div>
+
+            <button class="nav-button next-button">&gt;</button>
+
+            <div class="dots-indicator">
+              <span class="dot active"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer-actions">
+          <button class="action-button transfer-button">
+            <span class="arrow-icon">→</span>
+            Transfer
+          </button>
+          <button class="action-button print-button">
+            <span class="print-icon">🖨️</span>
+            Print
+          </button>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const carousel = document.querySelector(".carousel-container");
+        const prevButton = document.querySelector(".prev-button");
+        const nextButton = document.querySelector(".next-button");
+        const dots = document.querySelectorAll(".dot");
+        const cards = document.querySelectorAll(".ticket-card");
+
+        let currentIndex = 0;
+        const totalCards = cards.length;
+
+        // Tính toán chiều rộng của một slide (1 thẻ vé)
+        // Lấy chiều rộng thẻ + margin/padding giữa các thẻ
+        const getSlideWidth = () => {
+          if (cards.length === 0) return 0;
+          // Lấy chiều rộng của một thẻ vé (ví dụ: 375px/3 * 3 - margin)
+          // Trong CSS, width của thẻ là: calc(100% / 3 - 15px)
+          // Chiều rộng hiệu quả của 1 slide là: (Width của .carousel-wrapper) / 1
+          const wrapperWidth =
+            document.querySelector(".carousel-wrapper").offsetWidth;
+          return wrapperWidth;
+        };
+
+        // Hàm cập nhật vị trí carousel
+        const updateCarousel = () => {
+          const slideWidth = getSlideWidth();
+
+          // Điều chỉnh vị trí trượt bằng transform
+          // translateX tính bằng (Chiều rộng mỗi slide) * index hiện tại
+          // Thêm một giá trị bù trừ để căn thẻ vé vào giữa view
+          const cardMargin = 7.5; // margin-left của thẻ vé + padding-left của carousel-container
+          const offset = slideWidth / 2 + cardMargin;
+
+          carousel.style.transform = `translateX(calc(-${
+            currentIndex * slideWidth
+          }px - ${cardMargin}px))`;
+
+          updateDots();
+          updateNavButtons();
+        };
+
+        // Hàm cập nhật trạng thái chấm tròn
+        const updateDots = () => {
+          dots.forEach((dot, i) => {
+            dot.classList.toggle("active", i === currentIndex);
+          });
+        };
+
+        // Hàm cập nhật trạng thái nút điều hướng
+        const updateNavButtons = () => {
+          prevButton.classList.toggle("hidden", currentIndex === 0);
+          nextButton.classList.toggle(
+            "hidden",
+            currentIndex === totalCards - 1
+          );
+        };
+
+        // Xử lý sự kiện click nút Prev
+        prevButton.addEventListener("click", () => {
+          if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
+          }
+        });
+
+        // Xử lý sự kiện click nút Next
+        nextButton.addEventListener("click", () => {
+          if (currentIndex < totalCards - 1) {
+            currentIndex++;
+            updateCarousel();
+          }
+        });
+
+        // Xử lý khi click vào chấm tròn
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            currentIndex = index;
+            updateCarousel();
+          });
+        });
+
+        // Khởi tạo trạng thái ban đầu
+        updateCarousel();
+
+        // Đảm bảo cập nhật nếu kích thước màn hình thay đổi (ví dụ: xoay điện thoại)
+        window.addEventListener("resize", updateCarousel);
+      });
+    </script>
+  </body>
+</html>
