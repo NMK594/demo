@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vé của tôi - Giao diện Mobile</title>
+    <link rel="stylesheet" href="styletang.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="phone-frame">
+      <div class="status-bar">
+        <span>10:08</span>
+        <div>
+          <i class="bi bi-wifi"></i>
+          <span></span>
+          <i class="bi bi-battery-half"></i>
+        </div>
+      </div>
+
+      <div class="header-title">
+        <h2>Tặng vé</h2>
+      </div>
+
+      <div class="tabs-container">
+        <button class="tab active" data-tab="upcoming">Vé của tôi</button>
+        
+      </div>
+
+      <div class="content-wrapper">
+        <div id="upcoming" class="tab-content active">
+  <a href="" class="ticket-link">
+    <div class="ticket-item">
+      <div class="select-box">
+        <label><input type="checkbox" class="ticket-checkbox" aria-label="Chọn vé"></label>
+      </div>
+      <div class="date-col">
+        <span class="day">24</span>
+        <span class="month">Tháng 11</span>
+        <span class="year">2025</span>
+      </div>
+      <div class="info-col">
+        <div class="circle top"></div>
+        <div class="circle bottom"></div>
+        <p class="event-title">
+          LIVE CONCERT SKYNOTE 2025 
+        </p>
+        <div class="tags">
+          <span class="tag success">Chưa sử dụng</span>
+          <span class="tag ticket">Vé điện tử</span>
+        </div>
+        <p class="detail-line">
+          <span class="icon">🕑</span> 19:00, 24 Tháng 11, 2025
+        </p>
+        <p class="detail-line">
+          <span class="icon">📍</span> Mã đơn hàng: 117819279
+        </p>
+      </div>
+    </div>
+  </a>
+
+  <div class="ticket-item">
+    
+    <div class="select-box">
+      <label><input type="checkbox" class="ticket-checkbox" aria-label="Chọn vé"></label>
+    </div>
+    <div class="date-col">
+      <span class="day">20</span>
+      <span class="month">Tháng 12</span>
+      <span class="year">2025</span>
+    </div>
+    <div class="info-col">
+      <div class="circle top"></div>
+      <div class="circle bottom"></div>
+      <p class="event-title">
+     Y-CONCERT BY YEAH1
+
+      </p>
+      <div class="tags">
+        <span class="tag success">Chưa sử dụng</span>
+        <span class="tag ticket">Vé điện tử</span>
+      </div>
+      <p class="detail-line">
+        <span class="icon">🕑</span> 14:00, 20 Tháng 12, 2025
+      </p>
+      <p class="detail-line">
+        <span class="icon">📍</span> Mã đơn hàng: 533738383
+      </p>
+    </div>
+  </div>
+
+  <div class="ticket-item">
+    <div class="select-box">
+      <label><input type="checkbox" class="ticket-checkbox" aria-label="Chọn vé"></label>
+    </div>
+    <div class="date-col">
+      <span class="day">29</span>
+      <span class="month">Tháng 11</span>
+      <span class="year">2025</span>
+    </div>
+    <div class="info-col">
+      <div class="circle top"></div>
+      <div class="circle bottom"></div>
+      <p class="event-title">
+        SOOBIN LIVE CONCERT: ALL-ROUNDER THE FINAL
+      </p>
+      <div class="tags">
+        <span class="tag success">Chưa sử dụng</span>
+        <span class="tag ticket">Vé điện tử</span>
+      </div>
+      <p class="detail-line">
+        <span class="icon">🕑</span> 19:00, 29 Tháng 11, 2025
+      </p>
+      <p class="detail-line">
+        <span class="icon">📍</span> Mã đơn hàng: 896614627
+      </p>
+    </div>
+  </div>
+</div>
+
+  <div class="gift-wrap">
+  <a class="btn-gift" role="button" href="nhapthongtintang.html" aria-label="Tặng vé">Tặng vé</a>
+</div>
+        <div class="suggestion-cards">
+        
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <div class="nav-item">
+          <span class="icon-text">t</span>
+          <span class="label">Trang chủ</span>
+        </div>
+        <div class="nav-item active">
+          <span class="icon-active"></span>
+          <span class="label">Vé của tôi</span>
+        </div>
+        <div class="nav-item">
+          <span class="icon-text">👤</span>
+          <span class="label">Tài khoản</span>
+        </div>
+      </div>
+      <div class="android-nav-bar">
+        <span>&#9776;</span>
+        <span>&#9675;</span>
+        <span>&#9633;</span>
+      </div>
+    </div>
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.ticket-checkbox').forEach(cb => {
+    cb.addEventListener('change', e => {
+      const item = e.target.closest('.ticket-item');
+      if (item) item.classList.toggle('selected', e.target.checked);
+    });
+  });
+});
+</script>
+  </body>
+</html>
