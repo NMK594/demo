@@ -11,16 +11,22 @@ body {
     min-height: 100vh;
 }
 
+/* KHUNG MÀN HÌNH ĐIỆN THOẠI */
 .phone-frame {
-    width: 375px;
-    /* Chiều rộng cố định */
+     width: 375px;
     height: 750px;
     background-color: #000;
+    /* Nền đen của viền điện thoại */
+    border: 1px solid #ccc;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    /* Quan trọng để cuộn nội dung bên trong */
     border-radius: 30px;
+    /* Thêm bo tròn góc để giống điện thoại hơn */
+    padding-top: 25px;
+    /* Để chừa chỗ cho notch/viền trên nếu cần */
     position: relative;
 }
 
@@ -47,14 +53,24 @@ body {
 }
 
 .status-bar {
+    background-color: #007BFF;
+    /* Màu xanh lá cây */
+    color: white;
+    padding: 5px 15px;
     display: flex;
     justify-content: space-between;
+    font-size: 12px;
+}
+
+.status-bar>div {
+    display: flex;
     align-items: center;
-    padding: 10px 15px 5px;
-    background-color: white;
-    /* Thanh trên cùng màu trắng */
-    font-size: 15px;
-    font-weight: 600;
+    gap: 3px;
+}
+
+.phone-frame > .status-bar i {
+    font-size: 14px; /* Kích thước icon (Wifi và Pin) */
+    color: white; /* Màu icon trắng */
 }
 
 .phone-close-icon {
@@ -68,10 +84,12 @@ body {
 }
 
 .header-title {
+    background-color: #00315d; 
+    padding: 10px 15px;
     font-size: 18px;
     font-weight: 500;
     margin: 0;
-    color: #000;
+    color: #ffffff;
     text-align: center;
 }
 
@@ -164,7 +182,6 @@ body {
     margin-right: 15px;
 }
 
-
 .nav-button {
     position: absolute;
     top: 50%;
@@ -202,18 +219,15 @@ body {
 }
 
 .image-1 {
-    background-image: url('https://i.imgur.com/KqWkZ7C.jpg');
     /* Ảnh TV Girl mặc định */
 }
 
 .image-2 {
-    background-image: url('https://i.imgur.com/KqWkZ7C.jpg');
     /* Thay bằng ảnh khác */
     filter: sepia(0.5);
 }
 
 .image-3 {
-    background-image: url('https://i.imgur.com/KqWkZ7C.jpg');
     /* Thay bằng ảnh khác */
     filter: hue-rotate(180deg) brightness(0.7);
 }
@@ -274,7 +288,7 @@ body {
 
 /* ... (các styles chi tiết khác) ... */
 .artist-image {
-    background-image: url('https://i.imgur.com/KqWkZ7C.jpg');
+    
     background-size: cover;
     background-position: center top;
     mix-blend-mode: luminosity;
@@ -306,3 +320,4 @@ body {
     width: 12px;
     border-radius: 4px;
 }
+
