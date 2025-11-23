@@ -6,11 +6,15 @@
     <title>Tặng vé - Thông tin người nhận</title>
     <link rel="stylesheet" href="styletang.css" />
     <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
       rel="stylesheet"
     />
     <style>
-      /* Nhỏ gọn: style cho form nhập thông tin */
+      /* Style cho form nhập thông tin (Đã điều chỉnh để phù hợp với dark mode) */
       .gift-form-wrapper {
         padding: 18px;
         display: flex;
@@ -20,11 +24,11 @@
       .gift-form {
         width: 100%;
         max-width: 340px;
-        background: #0f1720; /* tối để tương phản với theme */
+        background: #0f1720; /* Nền form tối đậm */
         color: #fff;
         padding: 16px;
         border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(2,6,23,0.6);
+        box-shadow: 0 8px 24px rgba(2, 6, 23, 0.6);
       }
       .gift-form h3 {
         margin: 0 0 12px;
@@ -45,8 +49,8 @@
       .form-field input[type="email"] {
         padding: 10px 12px;
         border-radius: 8px;
-        border: 1px solid rgba(255,255,255,0.08);
-        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.03);
         color: #fff;
         font-size: 14px;
       }
@@ -59,10 +63,11 @@
       .btn-cancel {
         background: transparent;
         color: #9aa6bb;
-        border: 1px solid rgba(255,255,255,0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
         padding: 10px 14px;
         border-radius: 10px;
         cursor: pointer;
+        transition: background 0.2s;
       }
       .btn-submit {
         background: #1866d6;
@@ -72,6 +77,10 @@
         border-radius: 10px;
         cursor: pointer;
         font-weight: 600;
+        transition: background 0.2s;
+      }
+      .btn-submit:hover {
+        background: #0f58c7;
       }
       .hint {
         font-size: 12px;
@@ -96,8 +105,56 @@
         <h2>Tặng vé</h2>
       </div>
 
+      <!-- LỚP PHỦ XÁC THỰC PIN/OTP - MẶC ĐỊNH ẨN -->
+      <div class="pin-overlay hidden">
+        <!-- 1. HỘP NHẬP PIN -->
+        <div class="pin-box">
+          <h3>Nhập mã PIN xác thực</h3>
+          <div class="pin-dots">
+            <span></span><span></span><span></span> <span></span><span></span
+            ><span></span>
+          </div>
+          <div class="pin-keypad">
+            <button>1</button><button>2</button><button>3</button>
+            <button>4</button><button>5</button><button>6</button>
+            <button>7</button><button>8</button><button>9</button>
+            <div></div>
+            <button>0</button><button class="del">⌫</button>
+          </div>
+        </div>
+
+        <!-- 2. HỘP XÁC THỰC OTP (MẶC ĐỊNH ẨN) -->
+        <div class="otp-box hidden">
+          <h3 class="otp-title">Xác thực Digital OTP</h3>
+          <div class="otp-code-container">
+            <div class="otp-code-display">
+              <span></span><span></span><span></span><span></span> <span></span
+              ><span></span><span></span><span></span>
+            </div>
+          </div>
+          <p class="otp-timer-text">
+            Mã xác thực giao dịch (OTP) có hiệu lực trong vòng
+            <span id="otp-timer">45</span> giây
+          </p>
+          <button class="otp-verify-btn">Xác thực</button>
+        </div>
+      </div>
+
+      <!-- CUSTOM SUCCESS MODAL (THAY THẾ ALERT) - MẶC ĐỊNH ẨN -->
+      <div class="custom-modal-overlay hidden" id="successModal">
+        <div class="custom-modal">
+          <h4>Thành công!</h4>
+          <p>
+            Yêu cầu tặng vé đã được gửi thành công cho người nhận. Bạn sẽ được
+            chuyển về trang Vé của tôi.
+          </p>
+          <a href="tru1ve.html" class="modal-btn-ok link-as-button" id="btnOk"
+            >Hoàn tất</a
+          >
+        </div>
+      </div>
+
       <div class="tabs-container">
-        
         <button class="tab active">Điền thông tin</button>
       </div>
 
@@ -109,30 +166,50 @@
 
             <div class="form-field">
               <label for="contact">Email hoặc SĐT đã đăng ký</label>
-              <input id="contact" name="contact" type="text" placeholder="email@example.com hoặc 0123456789" required />
+              <input
+                id="contact"
+                name="contact"
+                type="text"
+                placeholder="email@example.com hoặc 0123456789"
+                required
+              />
             </div>
 
             <div class="form-field">
               <label for="fullname">Họ và tên người nhận</label>
-              <input id="fullname" name="fullname" type="text" placeholder="Nguyễn Văn A" required />
+              <input
+                id="fullname"
+                name="fullname"
+                type="text"
+                placeholder="Nguyễn Văn A"
+                required
+              />
             </div>
 
             <div class="form-field">
               <label for="message">Lời nhắn (tuỳ chọn)</label>
-              <input id="message" name="message" type="text" placeholder="Chúc bạn xem vui vẻ!" />
+              <input
+                id="message"
+                name="message"
+                type="text"
+                placeholder="Chúc bạn xem vui vẻ!"
+              />
             </div>
 
             <div class="form-actions">
-              <button type="button" class="btn-cancel" id="btnCancel">Huỷ</button>
+              <button type="button" class="btn-cancel" id="btnCancel">
+                Huỷ
+              </button>
               <button type="submit" class="btn-submit">Gửi tặng</button>
             </div>
 
-            <p class="hint">Số điện thoại hoặc email phải là thông tin đã đăng ký tài khoản.</p>
+            <p class="hint">
+              Số điện thoại hoặc email phải là thông tin đã đăng ký tài khoản.
+            </p>
           </form>
         </div>
 
-        <!-- giữ phần gift-wrap/footer suggestion nếu cần (ẩn ở trang này) -->
-        <div style="height:20px"></div>
+        <div style="height: 20px"></div>
       </div>
 
       <div class="footer-nav">
@@ -157,38 +234,209 @@
       </div>
     </div>
 
+    <!-- Cần Crypto JS để mô phỏng bảo mật OTP/Hasing, dù QR code không cần -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
     <script>
-      // Basic validation: contact must contain '@' (email) OR at least 9 digits (phone)
+      // --- UTILITIES ---
       function isPhoneLike(str) {
-        const digits = str.replace(/\D/g, '');
+        const digits = str.replace(/\D/g, "");
         return digits.length >= 9;
       }
       function isEmailLike(str) {
         return /\S+@\S+\.\S+/.test(str);
       }
 
-      document.getElementById('giftForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const contact = document.getElementById('contact').value.trim();
-        const fullname = document.getElementById('fullname').value.trim();
-        if (!fullname || fullname.length < 2) {
-          alert('Vui lòng nhập họ và tên hợp lệ.');
-          return;
-        }
-        if (!(isEmailLike(contact) || isPhoneLike(contact))) {
-          alert('Vui lòng nhập Email hợp lệ hoặc Số điện thoại (ít nhất 9 chữ số).');
-          return;
-        }
+      // --- PIN/OTP STATE AND ELEMENTS ---
+      const pinOverlay = document.querySelector(".pin-overlay");
+      const pinBox = pinOverlay.querySelector(".pin-box");
+      const otpBox = pinOverlay.querySelector(".otp-box");
+      const otpTimerDisplay = pinOverlay.querySelector("#otp-timer");
+      const otpCodeSpans = pinOverlay.querySelectorAll(
+        ".otp-code-display span"
+      );
+      const otpVerifyBtn = pinOverlay.querySelector(".otp-verify-btn");
+      const dotsPin = pinOverlay.querySelectorAll(".pin-dots span");
+      const keypad = pinOverlay.querySelectorAll(".pin-keypad button");
+      const successModal = document.getElementById("successModal");
+      const btnOk = document.getElementById("btnOk");
 
-        // TODO: gửi dữ liệu lên server hoặc chuyển tiếp
-        console.log({ contact, fullname, message: document.getElementById('message').value });
-        alert('Yêu cầu tặng vé đã được gửi. Kiểm tra lại trong "Vé của tôi".');
-        // quay lại trang vé
-        location.href = 'tru1ve.html';
+      let pin = "";
+      const correctPIN = "050904"; // Mã PIN mẫu
+      let otpTimer;
+      let currentOTP = "";
+      let giftData = {}; // Lưu dữ liệu form tạm thời
+
+      // --- AUTHENTICATION LOGIC ---
+
+      /**
+       * BƯỚC 3: Bắt đầu quá trình xác thực bằng cách hiển thị màn hình PIN.
+       */
+      function showPINOverlay(data) {
+        giftData = data; // Lưu dữ liệu form
+
+        // Dừng và xóa bộ đếm cũ nếu có (an toàn)
+        if (otpTimer) clearInterval(otpTimer);
+
+        // Đảm bảo chỉ PIN box hiển thị
+        otpBox.classList.add("hidden");
+        pinBox.classList.remove("hidden");
+
+        // HIỂN THỊ LỚP PHỦ CHUNG
+        pinOverlay.classList.remove("hidden");
+
+        // Đặt lại trạng thái PIN
+        pin = "";
+        dotsPin.forEach((d) => d.classList.remove("filled"));
+      }
+
+      /**
+       * BƯỚC 4: Xử lý đầu vào từ bàn phím số và chuyển sang OTP nếu PIN đúng
+       */
+      keypad.forEach((btn) => {
+        btn.onclick = () => {
+          // Chỉ xử lý khi PIN BOX đang hiển thị
+          if (pinBox.classList.contains("hidden")) return;
+
+          const val = btn.textContent;
+
+          if (btn.classList.contains("del")) pin = pin.slice(0, -1);
+          else if (pin.length < 6) pin += val;
+
+          // Cập nhật chấm PIN
+          dotsPin.forEach((d, i) =>
+            d.classList.toggle("filled", i < pin.length)
+          );
+
+          if (pin.length === 6) {
+            if (pin === correctPIN) {
+              // BƯỚC 4a: PIN đúng -> CHUYỂN TỪ PIN SANG OTP
+              pinBox.classList.add("hidden");
+              otpBox.classList.remove("hidden");
+              startOTPCountdown();
+            } else {
+              // Hiệu ứng lỗi PIN sai
+              pin = "";
+              dotsPin.forEach((d) => d.classList.remove("filled"));
+              pinBox.animate(
+                [
+                  { transform: "translateX(-8px)" },
+                  { transform: "translateX(8px)" },
+                  { transform: "translateX(-8px)" },
+                  { transform: "translateX(0)" },
+                ],
+                { duration: 300 }
+              );
+            }
+          }
+        };
       });
 
-      document.getElementById('btnCancel').addEventListener('click', () => {
-        location.href = 'tangve.html';
+      /**
+       * Logic Đếm ngược và Tạo mã OTP.
+       */
+      function startOTPCountdown() {
+        let timeLeft = 45; // 45 giây đếm ngược
+
+        function generateOTP() {
+          // Mã hóa dữ liệu (ví dụ: mã PIN + thời gian) để tạo OTP duy nhất
+          const base = correctPIN + Date.now().toString();
+          let hash =
+            typeof CryptoJS !== "undefined"
+              ? CryptoJS.SHA256(base).toString().substring(0, 8) // Lấy 8 ký tự đầu
+              : "DEMO" + Math.floor(Math.random() * 9000 + 1000);
+
+          // Tạo mã OTP 8 chữ số từ hash (chỉ lấy số)
+          let otpCode = hash.replace(/\D/g, "").substring(0, 8);
+          while (otpCode.length < 8) {
+            otpCode += Math.floor(Math.random() * 10);
+          }
+
+          otpCodeSpans.forEach((span, index) => {
+            span.textContent = otpCode[index];
+          });
+          currentOTP = otpCode; // Lưu OTP hiện tại
+          return otpCode;
+        }
+
+        function updateTimer() {
+          otpTimerDisplay.textContent = timeLeft;
+          if (timeLeft <= 0) {
+            clearInterval(otpTimer);
+            // Tạo OTP mới và bắt đầu lại đếm ngược
+            startOTPCountdown();
+            return; // Ngăn chặn timeLeft-- khi đã hết giờ
+          }
+          timeLeft--;
+        }
+
+        if (otpTimer) clearInterval(otpTimer);
+
+        generateOTP();
+        updateTimer();
+        otpTimer = setInterval(updateTimer, 1000);
+      }
+
+      // --- FORM AND FINAL ACTION LOGIC ---
+
+      document.getElementById("giftForm").addEventListener("submit", (e) => {
+        // BƯỚC 1: Sự kiện xảy ra khi nhấn nút "Gửi tặng"
+        e.preventDefault();
+        const contact = document.getElementById("contact").value.trim();
+        const fullname = document.getElementById("fullname").value.trim();
+        const message = document.getElementById("message").value;
+
+        // BƯỚC 2: Kiểm tra tính hợp lệ của Form (Validation)
+        if (!fullname || fullname.length < 2) {
+          console.error("Vui lòng nhập họ và tên hợp lệ.");
+          return; // Dừng lại nếu form không hợp lệ
+        }
+        if (!(isEmailLike(contact) || isPhoneLike(contact))) {
+          console.error(
+            "Vui lòng nhập Email hợp lệ hoặc Số điện thoại (ít nhất 9 chữ số)."
+          );
+          return; // Dừng lại nếu form không hợp lệ
+        }
+
+        // BƯỚC 3: Form hợp lệ -> Bắt đầu quá trình xác thực PIN
+        showPINOverlay({ contact, fullname, message });
+      });
+
+      /**
+       * BƯỚC 5: Logic khi nhấn nút "Xác thực" trên màn hình OTP (Giả sử OTP là đúng)
+       */
+      otpVerifyBtn.onclick = () => {
+        // Chỉ xử lý khi OTP BOX đang hiển thị
+        if (otpBox.classList.contains("hidden")) return;
+
+        // Dừng bộ đếm OTP
+        clearInterval(otpTimer);
+
+        // Ẩn lớp phủ PIN/OTP
+        pinBox.classList.add("hidden");
+        otpBox.classList.add("hidden");
+        pinOverlay.classList.add("hidden");
+
+        // 5a. Xử lý logic Gửi tặng (thành công)
+        console.log("Xác thực thành công. Gửi tặng vé...");
+
+        // BƯỚC 6: Hiển thị thông báo thành công (Custom Modal)
+        successModal.classList.remove("hidden");
+      };
+
+      // Sự kiện cho nút "Hoàn tất" trong Custom Modal
+      btnOk.addEventListener("click", () => {
+        // Ẩn modal
+        successModal.classList.add("hidden");
+        // Quay lại trang vé (giả lập chuyển trang)
+        // location.href = 'tru1ve.html';
+        console.log("Chuyển hướng về trang vé của tôi...");
+      });
+
+      document.getElementById("btnCancel").addEventListener("click", () => {
+        // Quay lại trang trước (giả lập)
+        // location.href = 'tangve.html';
+        console.log("Hủy và quay lại trang trước.");
       });
     </script>
   </body>

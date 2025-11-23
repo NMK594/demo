@@ -3,128 +3,102 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vé sự kiện - Carousel</title>
+    <title>Vé sự kiện - PIN và OTP</title>
+    <!-- THAM CHIẾU ĐẾN FILE CSS MỚI -->
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="stylectv.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
   </head>
+
   <body>
     <div class="phone-frame">
-       <div class="status-bar">
+      <div class="status-bar">
         <span>10:08</span>
         <div>
-         <i class="bi bi-wifi"></i>
+          <i class="bi bi-wifi"></i>
           <span></span>
-         <i class="bi bi-battery-half"></i>
+          <i class="bi bi-battery-half"></i>
         </div>
       </div>
 
       <div class="header-title">
         <h2>Vé của tôi</h2>
       </div>
+
+      <!-- LỚP PHỦ PIN/OTP -->
+      <div class="pin-overlay hidden">
+        <!-- 1. HỘP NHẬP PIN -->
+        <div class="pin-box">
+          <h3>Nhập mã PIN</h3>
+          <div class="pin-dots">
+            <span></span><span></span><span></span> <span></span><span></span
+            ><span></span>
+          </div>
+          <div class="pin-keypad">
+            <button>1</button><button>2</button><button>3</button>
+            <button>4</button><button>5</button><button>6</button>
+            <button>7</button><button>8</button><button>9</button>
+            <div></div>
+            <button>0</button><button class="del">⌫</button>
+          </div>
+        </div>
+
+        <!-- 2. HỘP XÁC THỰC OTP (MẶC ĐỊNH ẨN) -->
+        <div class="otp-box hidden">
+          <h3 class="otp-title">Xác thực Digital OTP</h3>
+          <div class="otp-code-container">
+            <div class="otp-code-display">
+              <span></span><span></span><span></span><span></span> <span></span
+              ><span></span><span></span><span></span>
+            </div>
+          </div>
+          <p class="otp-timer-text">
+            Mã xác thực giao dịch (OTP) có hiệu lực trong vòng
+            <span id="otp-timer">45</span> giây
+          </p>
+          <button class="otp-verify-btn">Xác thực</button>
+        </div>
+      </div>
+
       <div class="app-container">
-        <header class="app-header">
-
-
-        </header>
-
         <div class="ticket-content-wrapper">
           <div class="carousel-wrapper">
             <button class="nav-button prev-button">&lt;</button>
 
             <div class="carousel-container">
-              <div class="ticket-card ticket-1">
-                <p class="section-title">Seating</p>
-                <div class="seating-info">
-                  <div class="info-item">
-                    <span class="label">SEC</span><span class="value">C</span>
+              <!-- TICKET 1 -->
+              <div
+                class="ticket-card ticket-1"
+                data-ticket-id="TICKET-TVG-1234"
+              >
+                <div class="title-info">
+                  <div class="titlee">
+                    <p class="section-title">Seating</p>
                   </div>
-                  <div class="info-item">
-                    <span class="label">ROW</span><span class="value">4</span>
-                  </div>
-                  <div class="info-item">
-                    <span class="label">SEAT</span><span class="value">78</span>
-                  </div>
-                </div>
-                <div class="ticket-image-container">
-                  <div class="ticket-image">
-                    <img src="images/soobin.jpg" alt="TV GIRL">
-                    <div class="color-overlay overlay-1"></div>
-                    <div class="artist-image image-1"></div>
-                  </div>
-                  <div class="event-details">
-                    <p class="artist-name">ALL ROUNDER</p>
-                    <p class="event-time-location">
-                      Thur Aug, 15 - 6:30 PM - Nhà thi đấu Phú Thọ, HCM
-                    </p>
+                  <div class="seating-info">
+                    <div class="info-item">
+                      <span class="label">SEC</span><span class="value">C</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="label">ROW</span><span class="value">4</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="label">SEAT</span
+                      ><span class="value">78</span>
+                    </div>
                   </div>
                 </div>
-                <div class="ticket-actions">
-                  <a href="#" class="action-link">View Barcode</a>
-                  <a href="#" class="action-link">Ticket Details</a>
-                </div>
-                <div class="ticket-verified">
-                  <span class="verified-text">ticketmaster.verified</span>
-                </div>
-              </div>
 
-              <div class="ticket-card ticket-2">
-                <p class="section-title">Seating</p>
-                <div class="seating-info">
-                  <div class="info-item">
-                    <span class="label">SEC</span><span class="value">A</span>
-                  </div>
-                  <div class="info-item">
-                    <span class="label">ROW</span><span class="value">12</span>
-                  </div>
-                  <div class="info-item">
-                    <span class="label">SEAT</span><span class="value">30</span>
-                  </div>
-                </div>
                 <div class="ticket-image-container">
                   <div class="ticket-image">
-                    <img src="images/y-con.png" alt="TV GIRL">
-                    <div class="color-overlay overlay-2"></div>
-                    <div class="artist-image image-2"></div>
-                  </div>
-                  <div class="event-details">
-                    <p class="artist-name">Y-CONCERT</p>
-                    <p class="event-time-location">
-                      Sat Sept, 28 - 2:00 PM - Vinhomes Ocean Park 3
-                    </p>
-                  </div>
-                </div>
-                <div class="ticket-actions">
-                  <a href="#" class="action-link">View Barcode</a>
-                  <a href="#" class="action-link">Ticket Details</a>
-                </div>
-                <div class="ticket-verified">
-                  <span class="verified-text">ticketmaster.verified</span>
-                </div>
-              </div>
-
-              <div class="ticket-card ticket-3">
-                <p class="section-title">Seating</p>
-                <div class="seating-info">
-                  <div class="info-item">
-                    <span class="label">SEC</span><span class="value">D</span>
-                  </div>
-                  <div class="info-item">
-                    <span class="label">ROW</span><span class="value">8</span>
-                  </div>
-                  <div class="info-item">
-                    <span class="label">SEAT</span
-                    ><span class="value">150</span>
-                  </div>
-                </div>
-                <div class="ticket-image-container">
-                  <div class="ticket-image">
-                    <img src="images/download.jpg" alt="COLDPLAY">
-                    <div class="color-overlay overlay-3"></div>
-                    <div class="artist-image image-3"></div>
+                    <img src="images/download.jpg" alt="TV GIRL" />
                   </div>
                   <div class="event-details">
                     <p class="artist-name">SkyNote</p>
@@ -133,12 +107,104 @@
                     </p>
                   </div>
                 </div>
+
                 <div class="ticket-actions">
-                  <a href="#" class="action-link">View Barcode</a>
-                  <a href="#" class="action-link">Ticket Details</a>
+                  <button class="view-qr-btn">Xem QR</button>
+
+                  <div class="qr-wrapper hidden">
+                    <canvas id="dynamicQR1"></canvas>
+                    <p class="qr-refresh-text">QR sẽ đổi mỗi 10 giây</p>
+                  </div>
                 </div>
-                <div class="ticket-verified">
-                  <span class="verified-text">ticketmaster.verified</span>
+              </div>
+
+              <!-- TICKET 2 -->
+              <div
+                class="ticket-card ticket-2"
+                data-ticket-id="TICKET-BLR-5678"
+              >
+                <div class="title-info">
+                  <div class="titlee">
+                    <p class="section-title">Seating</p>
+                  </div>
+                  <div class="seating-info">
+                    <div class="info-item">
+                      <span class="label">SEC</span><span class="value">C</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="label">ROW</span><span class="value">4</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="label">SEAT</span
+                      ><span class="value">79</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ticket-image-container">
+                  <div class="ticket-image">
+                    <img src="images/download.jpg" alt="TV GIRL" />
+                  </div>
+                  <div class="event-details">
+                    <p class="artist-name">SkyNote</p>
+                    <p class="event-time-location">
+                      Fri Dec, 6 - 8:00 PM - The Global City, HCM
+                    </p>
+                  </div>
+                </div>
+
+                <div class="ticket-actions">
+                  <button class="view-qr-btn">Xem QR</button>
+
+                  <div class="qr-wrapper hidden">
+                    <canvas id="dynamicQR2"></canvas>
+                    <p class="qr-refresh-text">QR sẽ đổi mỗi 10 giây</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TICKET 3 -->
+              <div
+                class="ticket-card ticket-3"
+                data-ticket-id="TICKET-CDP-9012"
+              >
+                <div class="title-info">
+                  <div class="titlee">
+                    <p class="section-title">Seating</p>
+                  </div>
+                  <div class="seating-info">
+                    <div class="info-item">
+                      <span class="label">SEC</span><span class="value">C</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="label">ROW</span><span class="value">4</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="label">SEAT</span
+                      ><span class="value">80</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ticket-image-container">
+                  <div class="ticket-image">
+                    <img src="images/download.jpg" alt="TV GIRL" />
+                  </div>
+                  <div class="event-details">
+                    <p class="artist-name">SkyNote</p>
+                    <p class="event-time-location">
+                      Fri Dec, 6 - 8:00 PM - The Global City, HCM
+                    </p>
+                  </div>
+                </div>
+
+                <div class="ticket-actions">
+                  <button class="view-qr-btn">Xem QR</button>
+
+                  <div class="qr-wrapper hidden">
+                    <canvas id="dynamicQR3"></canvas>
+                    <p class="qr-refresh-text">QR sẽ đổi mỗi 10 giây</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -155,109 +221,268 @@
 
         <footer class="footer-actions">
           <button class="action-button transfer-button">
-            <span class="arrow-icon">→</span>
-            Transfer
+            <i class="bi bi-cash"></i>Pass Vé
           </button>
-          <button class="action-button print-button">
-            <span class="print-icon">🖨️</span>
-            Print
-          </button>
+          <a
+            href="tangve.html"
+            class="action-button print-button link-as-button"
+          >
+            <i class="bi bi-gift"></i> Tặng Vé
+          </a>
         </footer>
+      </div>
+      <div class="android-nav-bar">
+        <span>&#9776;</span>
+        <span>&#9675;</span>
+        <span>&#9633;</span>
       </div>
     </div>
 
+    <!-- JS GIỮ NGUYÊN VÀ HOẠT ĐỘNG CHÍNH XÁC -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const carousel = document.querySelector(".carousel-container");
+        const carouselContainer = document.querySelector(".carousel-container");
+        const cards = document.querySelectorAll(".ticket-card");
         const prevButton = document.querySelector(".prev-button");
         const nextButton = document.querySelector(".next-button");
-        const dots = document.querySelectorAll(".dot");
-        const cards = document.querySelectorAll(".ticket-card");
-
+        const dots = document.querySelectorAll(".dots-indicator .dot");
+        const numCards = cards.length;
         let currentIndex = 0;
-        const totalCards = cards.length;
 
-        // Tính toán chiều rộng của một slide (1 thẻ vé)
-        // Lấy chiều rộng thẻ + margin/padding giữa các thẻ
-        const getSlideWidth = () => {
-          if (cards.length === 0) return 0;
-          // Lấy chiều rộng của một thẻ vé (ví dụ: 375px/3 * 3 - margin)
-          // Trong CSS, width của thẻ là: calc(100% / 3 - 15px)
-          // Chiều rộng hiệu quả của 1 slide là: (Width của .carousel-wrapper) / 1
-          const wrapperWidth =
-            document.querySelector(".carousel-wrapper").offsetWidth;
-          return wrapperWidth;
-        };
+        // --- CAROUSEL LOGIC ---
+        function updateCarousel() {
+          const offset = -currentIndex * cards[0].offsetWidth;
+          carouselContainer.style.transform = `translateX(${offset}px)`;
 
-        // Hàm cập nhật vị trí carousel
-        const updateCarousel = () => {
-          const slideWidth = getSlideWidth();
-
-          // Điều chỉnh vị trí trượt bằng transform
-          // translateX tính bằng (Chiều rộng mỗi slide) * index hiện tại
-          // Thêm một giá trị bù trừ để căn thẻ vé vào giữa view
-          const cardMargin = 7.5; // margin-left của thẻ vé + padding-left của carousel-container
-          const offset = slideWidth / 2 + cardMargin;
-
-          carousel.style.transform = `translateX(calc(-${
-            currentIndex * slideWidth
-          }px - ${cardMargin}px))`;
-
-          updateDots();
-          updateNavButtons();
-        };
-
-        // Hàm cập nhật trạng thái chấm tròn
-        const updateDots = () => {
-          dots.forEach((dot, i) => {
-            dot.classList.toggle("active", i === currentIndex);
+          dots.forEach((dot, index) => {
+            dot.classList.toggle("active", index === currentIndex);
           });
-        };
+          // Kích hoạt lại QR update/clear khi chuyển thẻ vé
+          cards.forEach((card, index) => {
+            if (index !== currentIndex) {
+              const qrInterval = card.qrInterval;
+              if (qrInterval) {
+                clearInterval(qrInterval);
+                delete card.qrInterval;
+              }
+              // 1. Đảm bảo nút "Xem QR" hiển thị lại khi chuyển thẻ vé
+              const oldViewQrBtn = card.querySelector(".view-qr-btn");
+              oldViewQrBtn.classList.remove("hidden");
 
-        // Hàm cập nhật trạng thái nút điều hướng
-        const updateNavButtons = () => {
-          prevButton.classList.toggle("hidden", currentIndex === 0);
-          nextButton.classList.toggle(
-            "hidden",
-            currentIndex === totalCards - 1
-          );
-        };
+              card.querySelector(".qr-wrapper").classList.add("hidden");
+            }
+          });
+        }
 
-        // Xử lý sự kiện click nút Prev
         prevButton.addEventListener("click", () => {
-          if (currentIndex > 0) {
-            currentIndex--;
-            updateCarousel();
-          }
+          currentIndex = (currentIndex - 1 + numCards) % numCards;
+          updateCarousel();
         });
 
-        // Xử lý sự kiện click nút Next
         nextButton.addEventListener("click", () => {
-          if (currentIndex < totalCards - 1) {
-            currentIndex++;
-            updateCarousel();
-          }
+          currentIndex = (currentIndex + 1) % numCards;
+          updateCarousel();
         });
 
-        // Xử lý khi click vào chấm tròn
-        dots.forEach((dot, index) => {
-          dot.addEventListener("click", () => {
-            currentIndex = index;
-            updateCarousel();
-          });
-        });
-
-        // Khởi tạo trạng thái ban đầu
+        // Initialize carousel position
         updateCarousel();
 
-        // Đảm bảo cập nhật nếu kích thước màn hình thay đổi (ví dụ: xoay điện thoại)
-        window.addEventListener("resize", updateCarousel);
+        // --- PIN/OTP/QR LOGIC ---
+        const pinOverlay = document.querySelector(".pin-overlay");
+        const pinBox = pinOverlay.querySelector(".pin-box");
+        const otpBox = pinOverlay.querySelector(".otp-box");
+        const otpTimerDisplay = pinOverlay.querySelector("#otp-timer");
+        const otpCodeSpans = pinOverlay.querySelectorAll(
+          ".otp-code-display span"
+        );
+        const otpVerifyBtn = pinOverlay.querySelector(".otp-verify-btn");
+        const dotsPin = pinOverlay.querySelectorAll(".pin-dots span");
+        const keypad = pinOverlay.querySelectorAll(".pin-keypad button");
+
+        let pin = "";
+        const correctPIN = "050904";
+        let otpTimer;
+        let currentOTP = "";
+
+        // Lặp qua từng thẻ vé để gán sự kiện
+        document.querySelectorAll(".ticket-card").forEach((card) => {
+          const viewQrBtn = card.querySelector(".view-qr-btn");
+          const qrWrapper = card.querySelector(".qr-wrapper");
+          let qr;
+
+          if (!viewQrBtn) return;
+
+          // --- 1. Logic khi nhấn nút "Xem QR" ---
+          viewQrBtn.onclick = () => {
+            // Dừng và xóa bộ đếm/QR cũ nếu có (an toàn)
+            if (otpTimer) clearInterval(otpTimer);
+            if (card.qrInterval) clearInterval(card.qrInterval);
+
+            // Ẩn QR wrapper nếu nó đang hiện
+            qrWrapper.classList.add("hidden");
+
+            // HIỂN THỊ LỚP PHỦ CHUNG
+            pinOverlay.classList.remove("hidden");
+
+            // Đảm bảo PIN box hiển thị, OTP box ẩn
+            pinBox.classList.remove("hidden");
+            otpBox.classList.add("hidden");
+
+            // Đặt lại trạng thái PIN
+            pin = "";
+            dotsPin.forEach((d) => d.classList.remove("filled"));
+          };
+
+          // --- 2. Logic bàn phím PIN (Áp dụng chung, nhưng xử lý hành động riêng) ---
+          keypad.forEach((btn) => {
+            btn.onclick = () => {
+              // Chỉ xử lý khi PIN BOX đang hiển thị
+              if (pinBox.classList.contains("hidden")) return;
+
+              const val = btn.textContent;
+
+              if (btn.classList.contains("del")) pin = pin.slice(0, -1);
+              else if (pin.length < 6) pin += val;
+
+              // Cập nhật chấm PIN
+              dotsPin.forEach((d, i) =>
+                d.classList.toggle("filled", i < pin.length)
+              );
+
+              if (pin.length === 6) {
+                if (pin === correctPIN) {
+                  // CHUYỂN TỪ PIN SANG OTP
+                  pinBox.classList.add("hidden");
+                  otpBox.classList.remove("hidden");
+                  // Lấy ID thẻ vé hiện tại (cần thiết nếu có nhiều QR)
+                  const currentTicketID =
+                    cards[currentIndex].dataset.ticketId || "DEFAULT_ID";
+                  startOTPCountdown(currentTicketID);
+                } else {
+                  // Hiệu ứng lỗi PIN sai
+                  pin = "";
+                  dotsPin.forEach((d) => d.classList.remove("filled"));
+                  pinBox.animate(
+                    [
+                      { transform: "translateX(-8px)" },
+                      { transform: "translateX(8px)" },
+                      { transform: "translateX(-8px)" },
+                      { transform: "translateX(0)" },
+                    ],
+                    { duration: 300 }
+                  );
+                }
+              }
+            };
+          });
+
+          // --- 3. Logic Đếm ngược và Tạo mã OTP ---
+          function startOTPCountdown(ticketID) {
+            let timeLeft = 45; // 45 giây đếm ngược
+
+            function generateOTP() {
+              let otpCode = "";
+              for (let i = 0; i < 8; i++) {
+                otpCode += Math.floor(Math.random() * 10);
+              }
+              otpCodeSpans.forEach((span, index) => {
+                span.textContent = otpCode[index];
+              });
+              currentOTP = otpCode; // Lưu OTP hiện tại
+              return otpCode;
+            }
+
+            function updateTimer() {
+              otpTimerDisplay.textContent = timeLeft;
+              if (timeLeft <= 0) {
+                clearInterval(otpTimer);
+                // Tạo OTP và bắt đầu lại đếm ngược
+                startOTPCountdown(ticketID);
+                return; // Ngăn chặn timeLeft-- khi đã hết giờ
+              }
+              timeLeft--;
+            }
+
+            if (otpTimer) clearInterval(otpTimer);
+
+            generateOTP();
+            updateTimer();
+            otpTimer = setInterval(updateTimer, 1000);
+          }
+
+          // --- 4. Logic khi nhấn nút "Xác thực" trên màn hình OTP ---
+          otpVerifyBtn.onclick = () => {
+            // Chỉ xử lý khi OTP BOX đang hiển thị
+            if (otpBox.classList.contains("hidden")) return;
+
+            // Dừng bộ đếm OTP
+            clearInterval(otpTimer);
+
+            // Ẩn lớp phủ PIN/OTP
+            pinOverlay.classList.add("hidden");
+            otpBox.classList.add("hidden");
+
+            // HIỂN THỊ QR CODE (Sử dụng hàm showQR của thẻ vé đang active)
+            // Cần tìm thẻ vé hiện tại
+            const activeCard = cards[currentIndex];
+            showQR(activeCard);
+          };
+
+          // --- Logic hiện và update QR (được gọi từ otpVerifyBtn.onclick) ---
+          function showQR(targetCard) {
+            const qrWrapper = targetCard.querySelector(".qr-wrapper");
+            const viewQrBtn = targetCard.querySelector(".view-qr-btn"); // Lấy nút "Xem QR"
+
+            // 2. Ẩn nút "Xem QR"
+            viewQrBtn.classList.add("hidden");
+
+            qrWrapper.classList.remove("hidden");
+
+            // Khởi tạo QRious nếu chưa có hoặc đang thuộc thẻ vé khác
+            if (
+              !targetCard.qrInstance ||
+              targetCard.qrInstance.element !== qrCanvas
+            ) {
+              let qrCanvas = targetCard.querySelector("canvas");
+              targetCard.qrInstance = new QRious({
+                element: qrCanvas,
+                size: 200,
+                value: "loading...",
+              });
+            }
+            qr = targetCard.qrInstance; // Gán qr cho instance hiện tại
+
+            updateQR(targetCard);
+
+            // Dừng interval cũ của thẻ vé này nếu có
+            if (targetCard.qrInterval) clearInterval(targetCard.qrInterval);
+
+            // Thiết lập interval mới và lưu vào thẻ vé
+            targetCard.qrInterval = setInterval(
+              () => updateQR(targetCard),
+              10000
+            );
+          }
+
+          function updateQR(targetCard) {
+            const ticketID = targetCard.dataset.ticketId || "DEFAULT_TICKET";
+            const timestamp = Date.now();
+            // Data to hash includes current OTP generated on the OTP screen
+            const data = ticketID + "|" + timestamp + "|" + currentOTP;
+
+            const hash =
+              typeof CryptoJS !== "undefined"
+                ? CryptoJS.SHA256(data).toString()
+                : "DEMO_HASH_" + Math.random();
+
+            if (targetCard.qrInstance) {
+              targetCard.qrInstance.set({ value: hash });
+            }
+          }
+        });
       });
-
-
-      
     </script>
   </body>
 </html>
-
-

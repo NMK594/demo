@@ -1,376 +1,466 @@
-/* --- PHẦN 1: THIẾT LẬP CHUNG VÀ KHUNG ĐIỆN THOẠI --- */
-
+/* --- GLOBAL STYLES --- */
 body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 20px;
-    background-color: #f0f2f5;
+    font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    margin: 0;
+    background-color: #fff;
+    color: #e0e0e0;
 }
 
-/* KHUNG MÀN HÌNH ĐIỆN THOẠI */
-.phone-frame {
-     width: 375px;
-    height: 750px;
-    background-color: #000;
-    /* Nền đen của viền điện thoại */
-    border: 1px solid #ccc;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+.hidden {
+    display: none !important;
+}
+
+/* --- PHONE FRAME (GIẢ LẬP MÀN HÌNH ĐIỆN THOẠI) --- */
+
+
+/* --- HEADER --- */
+.header-title {
+    text-align: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+}
+
+.header-title h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+/* --- APP CONTAINER --- */
+.app-container {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    /* Quan trọng để cuộn nội dung bên trong */
-    border-radius: 30px;
-    /* Thêm bo tròn góc để giống điện thoại hơn */
-    padding-top: 25px;
-    /* Để chừa chỗ cho notch/viền trên nếu cần */
-    position: relative;
+    /* Dùng để chứa Carousel */
 }
 
-.app-container {
-    width: 100%;
-    height: 100%;
-    /* Chiếm hết chiều cao của phone-frame */
-    background-color: white;
-    /* Nền trắng chung của ứng dụng */
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    /* Đảm bảo header, content, footer xếp chồng */
-}
-
-/* --- PHẦN 2: HEADER VÀ THANH TRẠNG THÁI (Đã sửa lỗi) --- */
-
-.app-header {
-    background-color: #f0f2f5;
-    /* Nền header tổng thể */
-    padding-bottom: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    z-index: 10;
-}
-
-.status-bar {
-    background-color: #007BFF;
-    /* Màu xanh lá cây */
-    color: white;
-    padding: 5px 15px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-}
-
-.status-bar>div {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-}
-
-.phone-frame > .status-bar i {
-    font-size: 14px; /* Kích thước icon (Wifi và Pin) */
-    color: white; /* Màu icon trắng */
-}
-
-.phone-close-icon {
-    font-size: 24px;
-    color: #000;
-}
-
-.header-title-container {
-    padding: 5px 15px;
-    background-color: white;
-}
-
-.header-title {
-    background-color: #00315d; 
-    padding: 10px 15px;
-    font-size: 18px;
-    font-weight: 500;
-    margin: 0;
-    color: #ffffff;
-    text-align: center;
-}
-
-/* --- PHẦN 3: CAROUSEL VÀ SLIDING (Đã sửa lỗi) --- */
-
+/* --- CAROUSEL AND TICKET STYLES --- */
 .ticket-content-wrapper {
-   /* Đảm bảo nó chiếm đủ không gian và sử dụng Flexbox */
-    flex-grow: 1; /* Giữ nguyên */
-    background-color: #f0f2f5; /* Giữ nguyên */
-    
-    /* THAY THẾ các thuộc tính liên quan đến cuộn/tràn (overflow) 
-       bằng thuộc tính căn giữa nếu bạn muốn căn giữa tĩnh 
-    */
-    display: flex; /* Bật Flexbox */
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    overflow-y: hidden; /* Ngăn cuộn dọc */
-    padding-bottom: 0; /* Loại bỏ padding gây lệch */
+    flex-grow: 1;
+    overflow: hidden;
 }
 
 .carousel-wrapper {
-    overflow: hidden;
     position: relative;
-    
-    
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carousel-container {
     display: flex;
-    /* BỎ SCROLL-SNAP */
-    overflow-x: hidden;
-    /* Ẩn thanh cuộn ngang */
+    width: 100%;
+    height: 94%;
     transition: transform 0.3s ease-in-out;
-    /* Thêm hiệu ứng chuyển slide */
-    /* Thiết lập lại kích thước để chỉ hiển thị 1 thẻ vé + phần vé bên cạnh */
-    width: calc(3 * 100%);
-    /* 3 thẻ vé */
+    will-change: transform;
 }
 
 .ticket-card {
-    flex-shrink: 0;
-    width: calc(100% / 3);
-    /* Mỗi thẻ chiếm 1/3 tổng chiều rộng của carousel-container */
-
-    background-color: white;
-    margin: 10px 15px;
+    flex: 0 0 100%;
+    /* Đảm bảo mỗi thẻ chiếm 100% width */
+    width: 100%;
+    background: #242424;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding-top: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin: 8px 0;
+}
+
+/* --- TICKET DETAILS --- */
+.title-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.titlee {
+    border-bottom: 1px solid #555;
+}
+
+.section-title {
+    font-weight: 500;
+    color: #a0a0a0;
+    margin-top: -2px;
+    margin-bottom: 17px;
     text-align: center;
-    overflow: hidden;
-
-    /* BỎ SCROLL-SNAP-ALIGN */
+    font-size: 1.2rem;
 }
 
-
-/* Sửa lỗi hiển thị: Di chuyển container sang trái để thẻ vé được căn giữa */
-.carousel-container {
-    transform: translateX(-15px);
-    /* Bù lại padding/margin cho thẻ đầu tiên */
+.seating-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #555;
 }
 
-.ticket-card {
-    flex-shrink: 0;
-    /* 100% của parent (carousel-container) - 2 * margin */
-    width: calc(100% - 30px);
-    margin: 10px 15px;
-    /* Margin 15px giữa các thẻ */
-
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding-top: 20px;
-    text-align: center;
-    overflow: hidden;
-
-    scroll-snap-align: center;
-    /* Bắt buộc thẻ dừng ở giữa khi trượt */
-}
-.ticket-card {
-    /* Điều chỉnh lại margin để khoảng cách 15px được hiển thị đúng */
-    margin: 10px 7.5px;
-    /* Giảm margin ngang để không bị tràn */
-    width: calc(100% / 3 - 15px);
-    /* Điều chỉnh width theo margin mới */
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
 }
 
-.carousel-container {
-    /* Đặt padding bằng nửa margin giữa các thẻ */
-    padding: 0 7.5px;
-    /* Dùng Flexbox để điều chỉnh khoảng cách giữa các thẻ dễ hơn */
-    justify-content: flex-start;
-}
-/* Loại bỏ margin trái/phải cho thẻ đầu tiên và cuối cùng để trượt đúng */
-.ticket-card:first-child {
-    margin-left: 15px;
+.label {
+    font-size: 10px;
+    color: #888;
+    margin-bottom: 2px;
 }
 
-.ticket-card:last-child {
-    margin-right: 15px;
-}
-.ticket-card {
-    position: relative; /* để các layer con absolute nằm trong khung này */
-    z-index: 1; /* nội dung chính trên ảnh nền */
+.value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
 }
 
-/* 1) Ảnh nội tuyến an toàn (không chồng lên) */
+/* Image and Event Details */
+.ticket-image-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
 .ticket-image {
     width: 100%;
-    height: 160px; /* điều chỉnh theo nhu cầu */
+    height: 160px;
     overflow: hidden;
-    border-radius: 10px 10px 0 0;
-    background: #eee;
+    border-radius: 10px;
+    position: relative;
 }
+
 .ticket-image img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* giữ tỉ lệ mà không làm biến dạng */
-}
-
-/* 2) Ảnh nền layer (nằm phía sau nội dung) */
-.ticket-card .bg-image {
-    position: absolute;
-    inset: 0; /* top:0; right:0; bottom:0; left:0; */
-    width: 100%;
-    height: 100%;
     object-fit: cover;
-    z-index: 0; /* nằm sau nội dung (.ticket-card z-index:1) */
-    opacity: 0.9;
-    pointer-events: none; /* tránh bắt sự kiện chuột */
+    /* giữ tỉ lệ mà không làm biến dạng */
 }
 
-/* đảm bảo nội dung hiển thị trên ảnh nền */
-.ticket-card .card-content {
-    position: relative;
-    z-index: 2;
-}
-
-.nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: white;
-    /* Màu trắng để tương phản với ảnh */
-    font-size: 30px;
-    font-weight: 700;
-    cursor: pointer;
-    z-index: 5;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
-    padding: 10px;
-}
-
-.prev-button {
-    left: 10px;
-}
-
-.next-button {
-    right: 10px;
-}
-
+.color-overlay,
 .artist-image {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
-    background-position: center top;
-    mix-blend-mode: luminosity;
-    opacity: 0.9;
 }
 
-.image-1 {
-    /* Ảnh TV Girl mặc định */
+.overlay-1 {
+    background-color: rgba(0, 150, 136, 0.7);
 }
 
-.image-2 {
-    /* Thay bằng ảnh khác */
-    filter: sepia(0.5);
+/* Teal */
+.overlay-2 {
+    background-color: rgba(255, 100, 0, 0.7);
 }
 
-.image-3 {
-    /* Thay bằng ảnh khác */
-    filter: hue-rotate(180deg) brightness(0.7);
+/* Orange */
+.overlay-3 {
+    background-color: rgba(103, 58, 183, 0.7);
 }
 
-.color-overlay.overlay-1 {
-    background: linear-gradient(135deg, #00ff00, #ffff00, #ff00ff);
-    opacity: 0.8;
-}
+/* Deep Purple */
 
-.color-overlay.overlay-2 {
-    background: linear-gradient(135deg, #ff6b6b, #ffe66d, #4dccc6);
-    opacity: 0.8;
-}
-
-.color-overlay.overlay-3 {
-    background: linear-gradient(135deg, #1c7ed6, #6741d9, #e64980);
-    opacity: 0.8;
-}
-
-/* Ẩn nút prev ở vé đầu tiên và next ở vé cuối cùng (sẽ xử lý bằng JS) */
-.nav-button.hidden {
-    display: none;
-}
-/* --- PHẦN 4: CÁC THÀNH PHẦN KHÁC (Giữ nguyên) --- */
-/* ... (Seating Info, Ticket Image, Verified, Dots, Footer) ... */
-
-/* Đảm bảo Footer ở cuối cùng */
-.footer-actions {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 15px 30px;
-    background-color: white;
-    width: 100%;
-    box-sizing: border-box;
-    position: sticky;
-    /* Dùng sticky để footer dính dưới cùng khi cuộn */
-    bottom: 0;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-    margin-top: auto;
-    /* Đẩy xuống cuối cùng */
-}
-
-/* Thêm lại các chi tiết vé */
-.section-title {
-    font-size: 12px;
-    color: #6a6a6a;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-.seating-info {
-    display: flex;
-    justify-content: space-around;
-    padding: 0 20px 15px;
-    border-bottom: 1px solid #eee;
-}
-
-/* ... (các styles chi tiết khác) ... */
+/* Placeholder images (tạm thời dùng màu sắc) */
 .artist-image {
-    
     background-size: cover;
-    background-position: center top;
-    mix-blend-mode: luminosity;
-    opacity: 0.9;
-    pointer-events: none;
-}
-
-/* CHỈ BÁO CHẤM TRÒN */
-.dots-indicator {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px 0 10px;
-    background-color: #f0f2f5;
-}
-
-.dot {
-    height: 8px;
-    width: 8px;
-    margin: 0 4px;
+    background-position: center;
     background-color: #ccc;
-    border-radius: 50%;
-    display: inline-block;
-    cursor: pointer;
-    transition: background-color 0.3s, width 0.3s;
+    opacity: 0.8;
 }
 
-.dot.active {
-    background-color: #4a90e2;
-    width: 12px;
-    border-radius: 4px;
+.event-details {
+    text-align: left;
+    flex-grow: 1;
 }
-.info-item {
+
+.artist-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    color: #fff;
+}
+
+.event-time-location {
+    font-size: 12px;
+    color: #a0a0a0;
+    margin: 2px 0 0 0;
+}
+
+/* --- QR Code Section --- */
+.ticket-actions {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px dashed #555;
+}
+
+.view-qr-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.view-qr-btn:hover {
+    background: #0069d9;
+}
+
+.qr-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 10px;
 }
 
+.qr-refresh-text {
+    font-size: 12px;
+    color: #a0a0a0;
+    margin: 0;
+}
+
+canvas {
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    height: 175px;
+}
+
+/* Verification text */
+.ticket-verified {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.verified-text {
+    font-size: 10px;
+    font-weight: 500;
+    color: #00a877;
+    /* Màu xanh lá xác thực */
+    border: 1px solid #00a877;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+/* Carousel navigation */
+.nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+}
+
+.prev-button {
+    left: 5px;
+}
+
+.next-button {
+    right: 5px;
+}
+
+/* Indicator dots */
+.dots-indicator {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #444;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.dot.active {
+    background: #8ab4f8;
+}
+
+/* --- FOOTER --- */
+.footer-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    background-color: #1e1e1e;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    color: #8ab4f8;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* --- PIN / OTP OVERLAY STYLES --- */
+.pin-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* PIN Box */
+.pin-box,
+.otp-box {
+    width: 280px;
+    background: #2d2d2d;
+    color: #e0e0e0;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.pin-dots {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0 30px 0;
+}
+
+.pin-dots span {
+    width: 15px;
+    height: 15px;
+    border: 2px solid #8ab4f8;
+    border-radius: 50%;
+    background: transparent;
+    transition: background 0.1s;
+}
+
+.pin-dots span.filled {
+    background: #8ab4f8;
+}
+
+.pin-keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.pin-keypad button {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    font-size: 24px;
+    border: none;
+    border-radius: 50%;
+    background: #3a3a3a;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.1s;
+}
+
+.pin-keypad button:active {
+    background: #555;
+}
+
+.pin-keypad .del {
+    background: none;
+    color: #a0a0a0;
+    font-size: 20px;
+}
+
+.pin-keypad div {
+    visibility: hidden;
+}
+
+/* --- OTP Box STYLES --- */
+.otp-title {
+    color: #8ab4f8;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.otp-code-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.otp-code-display {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.otp-code-display span {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 0 2px;
+    color: #fff;
+    border-bottom: 2px dashed #444;
+}
+
+.otp-timer-text {
+    font-size: 14px;
+    color: #a0a0a0;
+    margin-bottom: 20px;
+}
+
+#otp-timer {
+    font-weight: 700;
+    color: #ff8080;
+}
+
+.otp-verify-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.otp-verify-btn:hover {
+    background: #0056b3;
+}
+.link-as-button {
+    text-decoration: none;
+}
