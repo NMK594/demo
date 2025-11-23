@@ -1,0 +1,307 @@
+body {
+    background-color: #f0f0f0;
+    /* Nền xung quanh khung điện thoại */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* KHUNG MÀN HÌNH ĐIỆN THOẠI */
+.phone-frame {
+    width: 375px;
+    /* Chiều rộng chuẩn của một số màn hình mobile phổ biến */
+    height: 750px;
+    /* Chiều cao tùy chỉnh để chứa hết nội dung */
+    background-color: #000;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Quan trọng để cuộn nội dung bên trong */
+}
+
+/* THANH TRẠNG THÁI (STATUS BAR) */
+.status-bar {
+    background-color: #28a745;
+    /* Màu xanh lá cây */
+    color: white;
+    padding: 5px 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.status-bar>div {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+/* THANH TIÊU ĐỀ CHÍNH */
+.header-title {
+    background-color: #000;
+    color: white;
+    padding: 10px 15px;
+}
+
+.header-title h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+/* NAVIGATION TABS */
+.tabs-container {
+    display: flex;
+    padding: 15px;
+    background-color: #000;
+    border-bottom: 1px solid #333;
+}
+
+.tab {
+    background: none;
+    border: none;
+    color: #999;
+    padding: 5px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab.active {
+    color: white;
+    font-weight: bold;
+    border-bottom-color: #28a745;
+}
+
+/* VÙNG NỘI DUNG CHÍNH */
+.content-wrapper {
+    flex-grow: 1;
+    /* Cho phép nội dung cuộn nếu quá dài */
+    padding: 0 15px;
+    background-color: #000;
+    overflow-y: auto;
+    /* Cho phép cuộn */
+    padding-bottom: 20px;
+    /* Thêm khoảng trống dưới cùng */
+}
+
+/* THẺ VÉ */
+.ticket-item {
+    display: flex;
+    margin: 20px 0;
+    position: relative;
+}
+
+.date-col {
+    background-color: #222;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    width: 70px;
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.date-col .day {
+    font-size: 32px;
+    font-weight: bold;
+    display: block;
+}
+
+.date-col .month,
+.date-col .year {
+    font-size: 12px;
+    display: block;
+}
+
+.info-col {
+    background-color: #222;
+    color: white;
+    padding: 15px;
+    flex-grow: 1;
+    border-radius: 8px;
+    position: relative;
+}
+
+/* Đường timeline */
+.ticket-item::before {
+    content: '';
+    position: absolute;
+    left: 80px;
+    /* Vị trí giữa cột ngày và cột thông tin */
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #28a745;
+    /* Màu xanh lá cây */
+}
+
+/* Chấm tròn trên timeline */
+.info-col .circle {
+    width: 10px;
+    height: 10px;
+    background-color: #28a745;
+    border-radius: 50%;
+    position: absolute;
+    left: -25px;
+    /* Căn chỉnh với đường timeline */
+}
+
+.info-col .circle.top {
+    top: 15px;
+}
+
+.info-col .circle.bottom {
+    bottom: 15px;
+}
+
+.event-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.tags {
+    margin-bottom: 10px;
+}
+
+.tag {
+    padding: 3px 8px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.tag.success {
+    background-color: #28a745;
+    /* Màu xanh lá cây */
+    color: white;
+}
+
+.tag.ticket {
+    background-color: #555;
+    color: white;
+}
+
+.detail-line {
+    font-size: 13px;
+    color: #ccc;
+    margin: 3px 0;
+    display: flex;
+    align-items: center;
+}
+
+.detail-line .icon {
+    margin-right: 5px;
+    font-size: 16px;
+    color: #28a745;
+}
+
+/* CÓ THỂ BẠN CŨNG THÍCH */
+.suggestion-title {
+    color: white;
+    margin-top: 30px;
+    font-size: 18px;
+}
+
+.suggestion-cards {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    /* Cho phép cuộn ngang */
+    padding-bottom: 5px;
+}
+
+.card-item {
+    flex-shrink: 0;
+    width: 150px;
+    height: 150px;
+    background-color: #333;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Giả lập hình ảnh */
+.card-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.img-1 {
+    background-image: url('https://via.placeholder.com/150/78c06e/FFFFFF?text=Item+1');
+}
+
+.img-2 {
+    background-image: url('https://via.placeholder.com/150/e06b7a/FFFFFF?text=Item+2');
+}
+
+
+/* FOOTER NAVIGATION */
+.footer-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #1a1a1a;
+    color: #888;
+    height: 60px;
+    border-top: 1px solid #333;
+    position: sticky;
+    bottom: 30px;
+    /* Đặt trên thanh điều hướng Android */
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.nav-item .icon-text {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.nav-item.active {
+    color: #28a745;
+}
+
+/* Biểu tượng active (Vé của tôi) */
+.nav-item.active .icon-active {
+    width: 6px;
+    height: 6px;
+    background-color: #28a745;
+    border-radius: 50%;
+    margin-bottom: 2px;
+}
+
+.nav-item.active .label {
+    font-weight: bold;
+}
+
+/* THANH ĐIỀU HƯỚNG ANDROID GIẢ LẬP */
+.android-nav-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    height: 30px;
+    font-size: 18px;
+}
+
+.android-nav-bar span {
+    cursor: pointer;
+}
