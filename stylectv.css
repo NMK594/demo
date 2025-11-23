@@ -1,7 +1,7 @@
 /* --- PHẦN 1: THIẾT LẬP CHUNG VÀ KHUNG ĐIỆN THOẠI --- */
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 20px;
     background-color: #f0f2f5;
@@ -96,15 +96,25 @@ body {
 /* --- PHẦN 3: CAROUSEL VÀ SLIDING (Đã sửa lỗi) --- */
 
 .ticket-content-wrapper {
-    overflow-y: auto;
-    padding-bottom: 100px;
-    flex-grow: 1;
-    background-color: #f0f2f5;
+   /* Đảm bảo nó chiếm đủ không gian và sử dụng Flexbox */
+    flex-grow: 1; /* Giữ nguyên */
+    background-color: #f0f2f5; /* Giữ nguyên */
+    
+    /* THAY THẾ các thuộc tính liên quan đến cuộn/tràn (overflow) 
+       bằng thuộc tính căn giữa nếu bạn muốn căn giữa tĩnh 
+    */
+    display: flex; /* Bật Flexbox */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    overflow-y: hidden; /* Ngăn cuộn dọc */
+    padding-bottom: 0; /* Loại bỏ padding gây lệch */
 }
 
 .carousel-wrapper {
     overflow: hidden;
     position: relative;
+    
+    
 }
 
 .carousel-container {
@@ -114,7 +124,6 @@ body {
     /* Ẩn thanh cuộn ngang */
     transition: transform 0.3s ease-in-out;
     /* Thêm hiệu ứng chuyển slide */
-
     /* Thiết lập lại kích thước để chỉ hiển thị 1 thẻ vé + phần vé bên cạnh */
     width: calc(3 * 100%);
     /* 3 thẻ vé */
@@ -135,6 +144,7 @@ body {
 
     /* BỎ SCROLL-SNAP-ALIGN */
 }
+
 
 /* Sửa lỗi hiển thị: Di chuyển container sang trái để thẻ vé được căn giữa */
 .carousel-container {
@@ -180,6 +190,43 @@ body {
 
 .ticket-card:last-child {
     margin-right: 15px;
+}
+.ticket-card {
+    position: relative; /* để các layer con absolute nằm trong khung này */
+    z-index: 1; /* nội dung chính trên ảnh nền */
+}
+
+/* 1) Ảnh nội tuyến an toàn (không chồng lên) */
+.ticket-image {
+    width: 100%;
+    height: 160px; /* điều chỉnh theo nhu cầu */
+    overflow: hidden;
+    border-radius: 10px 10px 0 0;
+    background: #eee;
+}
+.ticket-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* giữ tỉ lệ mà không làm biến dạng */
+}
+
+/* 2) Ảnh nền layer (nằm phía sau nội dung) */
+.ticket-card .bg-image {
+    position: absolute;
+    inset: 0; /* top:0; right:0; bottom:0; left:0; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0; /* nằm sau nội dung (.ticket-card z-index:1) */
+    opacity: 0.9;
+    pointer-events: none; /* tránh bắt sự kiện chuột */
+}
+
+/* đảm bảo nội dung hiển thị trên ảnh nền */
+.ticket-card .card-content {
+    position: relative;
+    z-index: 2;
 }
 
 .nav-button {
@@ -293,6 +340,7 @@ body {
     background-position: center top;
     mix-blend-mode: luminosity;
     opacity: 0.9;
+    pointer-events: none;
 }
 
 /* CHỈ BÁO CHẤM TRÒN */
@@ -319,5 +367,10 @@ body {
     background-color: #4a90e2;
     width: 12px;
     border-radius: 4px;
+}
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 

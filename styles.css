@@ -99,6 +99,7 @@ body {
     * ẨN SCROLLBAR TRÊN TRÌNH DUYỆT CHROME, SAFARI, OPERA */
     &::-webkit-scrollbar {
         display: none;
+       
     }
 
     /* ẨN SCROLLBAR TRÊN TRÌNH DUYỆT MICROSOFT EDGE */
