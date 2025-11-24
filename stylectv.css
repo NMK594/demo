@@ -19,6 +19,7 @@ body {
 
 /* --- HEADER --- */
 .header-title {
+    position: relative;
     text-align: center;
     padding: 10px 0;
     border-bottom: 1px solid #333;
@@ -29,6 +30,27 @@ body {
     font-size: 18px;
     font-weight: 700;
     color: #fff;
+}
+
+.back-button {
+    position: absolute;
+    /* Định vị tuyệt đối */
+    left: 15px;
+    /* Cách lề trái 1 khoảng nhất định */
+    top: 50%;
+    /* Dịch chuyển xuống giữa theo chiều dọc */
+    transform: translateY(-50%);
+    /* Căn giữa hoàn toàn theo chiều dọc */
+    color: #fff;
+    /* Màu trắng cho mũi tên */
+    font-size: 20px;
+    /* Kích thước icon */
+    z-index: 10;
+    /* Đảm bảo nút nằm trên cùng */
+    text-decoration: none;
+    /* Loại bỏ gạch chân của thẻ a */
+    padding: 5px;
+    /* Dễ bấm hơn */
 }
 
 /* --- APP CONTAINER --- */
@@ -463,4 +485,99 @@ canvas {
 }
 .link-as-button {
     text-decoration: none;
+}
+
+/* ======================================= */
+/* --- STYLES CHO CÁC TRẠNG THÁI VÉ MỚI --- */
+/* ======================================= */
+
+/* --- TICKET ĐÃ CHECKIN (Vé 1 & 2) --- */
+
+.ticket-card.checked-in {
+    /* Tạo hiệu ứng mờ nhẹ cho vé đã sử dụng */
+    opacity: 0.7;
+    /* Đường viền xanh lá cây để đánh dấu */
+}
+
+.ticket-card.checked-in .qr-wrapper {
+    /* Đảm bảo QR wrapper luôn hiển thị */
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ticket-card.checked-in .static-qr {
+    /* Định dạng cho QR tĩnh */
+    width: 175px;
+    height: 175px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    /* Loại bỏ style canvas cũ, dùng cho img */
+}
+
+.checked-in-text {
+    /* Chữ ĐÃ CHECKIN */
+    font-size: 16px;
+    font-weight: 700;
+    color: #00a877;
+    /* Màu xanh lá cây nổi bật */
+    margin-top: -5px;
+    padding: 5px 15px;
+    letter-spacing: 2px;
+}
+
+/* --- TICKET ĐÃ HẾT HẠN (Vé 3) --- */
+
+.ticket-card.expired {
+    /* Hiệu ứng hết hạn: mờ hơn, màu sắc khác */
+    opacity: 0.5;
+    /* Đường viền đỏ cảnh báo */
+    pointer-events: none;
+    /* Ngăn chặn tương tác (chắc chắn hơn) */
+}
+
+.expired-text {
+    /* Chữ VÉ ĐÃ HẾT HẠN */
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff4d4d;
+    /* Màu đỏ nổi bật */
+    text-align: center;
+    padding: 30px 0;
+    /* Cho chữ nằm giữa phần actions */
+    letter-spacing: 2px;
+}
+
+/* Ẩn các yếu tố không liên quan trên vé đã hết hạn */
+.ticket-card.expired .view-qr-btn,
+.ticket-card.expired .qr-wrapper {
+    display: none !important;
+}
+
+/* Điều chỉnh lại layout của ticket actions để chứa thông báo hết hạn */
+.ticket-card.expired .ticket-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* --- STYLES CHO NÚT BỊ TẮT (DISABLED) --- */
+
+/* Áp dụng cho nút <button> (Pass Vé) */
+.footer-actions button:disabled,
+/* Áp dụng cho thẻ <a> (Tặng Vé) */
+.footer-actions .disabled-link {
+    opacity: 0.5;
+    /* Làm mờ nút */
+    cursor: not-allowed;
+    /* Thay đổi con trỏ chuột thành biểu tượng cấm */
+    pointer-events: none;
+    /* Quan trọng: Ngăn chặn click hoàn toàn trên thẻ <a> */
+}
+
+/* Đảm bảo style của thẻ <a> vẫn được áp dụng opacity */
+.footer-actions .disabled-link {
+    color: #8ab4f8;
+    /* Giữ màu chữ như ban đầu nhưng bị mờ do opacity */
 }

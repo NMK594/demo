@@ -47,6 +47,7 @@ body {
 
 /* THANH TIÊU ĐỀ CHÍNH */
 .header-title {
+    position: relative;
     background-color: #00315d;
     color: white;
     padding: 10px 15px;
@@ -58,7 +59,26 @@ body {
     text-align: center;
     
 }
-
+.back-button {
+    position: absolute;
+    /* Định vị tuyệt đối */
+    left: 15px;
+    /* Cách lề trái 1 khoảng nhất định */
+    top: 50%;
+    /* Dịch chuyển xuống giữa theo chiều dọc */
+    transform: translateY(-50%);
+    /* Căn giữa hoàn toàn theo chiều dọc */
+    color: #fff;
+    /* Màu trắng cho mũi tên */
+    font-size: 20px;
+    /* Kích thước icon */
+    z-index: 10;
+    /* Đảm bảo nút nằm trên cùng */
+    text-decoration: none;
+    /* Loại bỏ gạch chân của thẻ a */
+    padding: 5px;
+    /* Dễ bấm hơn */
+}
 /* NAVIGATION TABS */
 .tabs-container {
     display: flex;

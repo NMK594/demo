@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vé của tôi - Giao diện Mobile</title>
+    <title>Vé của tôi - Bán Lại Vé</title>
+    <!-- Giả định file styletang.css đã có định nghĩa cho các modal -->
     <link rel="stylesheet" href="styletang.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
@@ -17,14 +18,17 @@
         gap: 8px;
         align-items: center;
       }
-      .ticket-item.selected .sell-price-row { display: flex; flex-wrap:wrap; }
+      .ticket-item.selected .sell-price-row {
+        display: flex;
+        flex-wrap: wrap;
+      }
       .sell-price-input {
         appearance: none;
         -webkit-appearance: none;
         padding: 8px 10px;
         border-radius: 8px;
-        border: 1px solid rgba(255,255,255,0.08);
-        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.03);
         color: #fff;
         width: 140px;
         box-sizing: border-box;
@@ -42,6 +46,23 @@
         opacity: 0.5;
         pointer-events: none;
       }
+      /* Custom styles for Dark Theme (Optional, for better visual) */
+      .ticket-item {
+        background: #1e1e1e;
+        border: 1px solid #333;
+        color: #e0e0e0;
+      }
+      .ticket-item.selected {
+        border-color: #8ab4f8;
+        background: #252525;
+      }
+      .event-title {
+        color: #fff;
+      }
+      .tag.success {
+        background: #1a4d33;
+        color: #a4e5c8;
+      }
     </style>
   </head>
   <body>
@@ -56,129 +77,165 @@
       </div>
 
       <div class="header-title">
-        <h2>Bán lại vé</h2>
+        <a href="chitietve2.html" class="back-button">
+          <i class="bi bi-arrow-left"></i>
+        </a>
+        <h2>Pass vé</h2>
+      </div>
+
+      <!-- LỚP PHỦ XÁC THỰC PIN/OTP -->
+      <div class="pin-overlay hidden">
+        <!-- 1. HỘP NHẬP PIN -->
+        <div class="pin-box">
+          <h3>Nhập mã PIN xác thực</h3>
+          <div class="pin-dots">
+            <span></span><span></span><span></span> <span></span><span></span
+            ><span></span>
+          </div>
+          <div class="pin-keypad">
+            <button>1</button><button>2</button><button>3</button>
+            <button>4</button><button>5</button><button>6</button>
+            <button>7</button><button>8</button><button>9</button>
+            <div></div>
+            <button>0</button><button class="del">⌫</button>
+          </div>
+        </div>
+
+        <!-- 2. HỘP XÁC THỰC OTP (MẶC ĐỊNH ẨN) -->
+        <div class="otp-box hidden">
+          <h3 class="otp-title">Xác thực Digital OTP</h3>
+          <div class="otp-code-container">
+            <div class="otp-code-display">
+              <span></span><span></span><span></span><span></span> <span></span
+              ><span></span><span></span><span></span>
+            </div>
+          </div>
+          <p class="otp-timer-text">
+            Mã xác thực giao dịch (OTP) có hiệu lực trong vòng
+            <span id="otp-timer">45</span> giây
+          </p>
+          <button class="otp-verify-btn">Xác thực</button>
+        </div>
+      </div>
+
+      <!-- CUSTOM SUCCESS MODAL (THAY THẾ ALERT) -->
+      <div class="custom-modal-overlay hidden" id="successModal">
+        <div class="custom-modal">
+          <h4>Yêu cầu thành công!</h4>
+          <p>
+            Yêu cầu bán vé đã được gửi đi. Vé của bạn sẽ được hiển thị trên sàn
+            giao dịch sau khi hệ thống kiểm duyệt.
+          </p>
+          <a
+            href="chitietve1.html"
+            class="modal-btn-ok link-as-button"
+            id="btnOk"
+            >Hoàn tất</a
+          >
+        </div>
       </div>
 
       <div class="tabs-container">
         <button class="tab active" data-tab="upcoming">Vé của tôi</button>
-        
       </div>
 
       <div class="content-wrapper">
         <div id="upcoming" class="tab-content active">
-  <div class="ticket-link">
-  <div class="ticket-item" data-original-price="120000">
-      <div class="select-box">
-        <label><input type="checkbox" class="ticket-checkbox" aria-label="Chọn vé"></label>
-      </div>
-      <div class="date-col">
-        <span class="day">24</span>
-        <span class="month">Tháng 11</span>
-        <span class="year">2025</span>
-      </div>
-      <div class="info-col">
-        <div class="circle top"></div>
-        <div class="circle bottom"></div>
-        <p class="event-title">
-          LIVE CONCERT SKYNOTE 2025 
-        </p>
-        <div class="tags">
-          <span class="tag success">Chưa sử dụng</span>
-          <span class="tag ticket">Vé điện tử</span>
-        </div>
-        <p class="detail-line">
-          <span class="icon">🕑</span> 19:00, 24 Tháng 11, 2025
-        </p>
-        <p class="detail-line">
-          <span class="icon">📍</span> Số vé: C478
-        </p>
-         <!-- sell price row (hidden until selected) -->
-        <div class="sell-price-row">
-          <input type="number" class="sell-price-input" min="0" placeholder="Giá bán (VND)" />
-          <div class="sell-price-note">Tối đa: <strong class="orig-price">120000</strong>VND</div>
-          <div class="sell-price-error" aria-live="polite"></div>
-        </div>
-      </div>
-    </div>
-  </a>
+          <div class="ticket-link">
+            <div class="ticket-item" data-original-price="120000">
+              <div class="select-box">
+                <label
+                  ><input
+                    type="checkbox"
+                    class="ticket-checkbox"
+                    aria-label="Chọn vé"
+                /></label>
+              </div>
+              <div class="date-col">
+                <span class="day">24</span>
+                <span class="month">Tháng 11</span>
+                <span class="year">2025</span>
+              </div>
+              <div class="info-col">
+                <div class="circle top"></div>
+                <div class="circle bottom"></div>
+                <p class="event-title">LIVE CONCERT SKYNOTE 2025</p>
+                <div class="tags">
+                  <span class="tag success">Chưa sử dụng</span>
+                  <span class="tag ticket">Vé điện tử</span>
+                </div>
+                <p class="detail-line">
+                  <span class="icon">🕑</span> 19:00, 24 Tháng 11, 2025
+                </p>
+                <p class="detail-line">
+                  <span class="icon">📍</span> Số vé: C478
+                </p>
+                <!-- sell price row (hidden until selected) -->
+                <div class="sell-price-row">
+                  <input
+                    type="number"
+                    class="sell-price-input"
+                    min="0"
+                    placeholder="Giá bán (VND)"
+                  />
+                  <div class="sell-price-note">
+                    Tối đa: <strong class="orig-price">120000</strong>VND
+                  </div>
+                  <div class="sell-price-error" aria-live="polite"></div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-  <div class="ticket-item" data-original-price="120000">
-    
-    <div class="select-box">
-      <label><input type="checkbox" class="ticket-checkbox" aria-label="Chọn vé"></label>
-    </div>
-    <div class="date-col">
-      <span class="day">20</span>
-      <span class="month">Tháng 12</span>
-      <span class="year">2025</span>
-    </div>
-    <div class="info-col">
-      <div class="circle top"></div>
-      <div class="circle bottom"></div>
-      <p class="event-title">
-     Y-CONCERT BY YEAH1
-
-      </p>
-      <div class="tags">
-        <span class="tag success">Chưa sử dụng</span>
-        <span class="tag ticket">Vé điện tử</span>
-      </div>
-      <p class="detail-line">
-        <span class="icon">🕑</span> 14:00, 20 Tháng 12, 2025
-      </p>
-      <p class="detail-line">
-        <span class="icon">📍</span> Số vé: A764
-      </p>
-       <!-- sell price row (hidden until selected) -->
-        <div class="sell-price-row">
-          <input type="number" class="sell-price-input" min="0" placeholder="Giá bán (VND)" />
-          <div class="sell-price-note">Tối đa: <strong class="orig-price">120000</strong>VND</div>
-          <div class="sell-price-error" aria-live="polite"></div>
+          <div class="ticket-item" data-original-price="120000">
+            <div class="select-box">
+              <label
+                ><input
+                  type="checkbox"
+                  class="ticket-checkbox"
+                  aria-label="Chọn vé"
+              /></label>
+            </div>
+            <div class="date-col">
+              <span class="day">20</span>
+              <span class="month">Tháng 12</span>
+              <span class="year">2025</span>
+            </div>
+            <div class="info-col">
+              <div class="circle top"></div>
+              <div class="circle bottom"></div>
+              <p class="event-title">Y-CONCERT BY YEAH1</p>
+              <div class="tags">
+                <span class="tag success">Chưa sử dụng</span>
+                <span class="tag ticket">Vé điện tử</span>
+              </div>
+              <p class="detail-line">
+                <span class="icon">🕑</span> 14:00, 20 Tháng 12, 2025
+              </p>
+              <p class="detail-line">
+                <span class="icon">📍</span> Số vé: A764
+              </p>
+              <!-- sell price row (hidden until selected) -->
+              <div class="sell-price-row">
+                <input
+                  type="number"
+                  class="sell-price-input"
+                  min="0"
+                  placeholder="Giá bán (VND)"
+                />
+                <div class="sell-price-note">
+                  Tối đa: <strong class="orig-price">120000</strong>VND
+                </div>
+                <div class="sell-price-error" aria-live="polite"></div>
+              </div>
+            </div>
+          </div>
         </div>
-    </div>
-  </div>
 
- <div class="ticket-item" data-original-price="120000">
-    <div class="select-box">
-      <label><input type="checkbox" class="ticket-checkbox" aria-label="Chọn vé"></label>
-    </div>
-    <div class="date-col">
-      <span class="day">29</span>
-      <span class="month">Tháng 11</span>
-      <span class="year">2025</span>
-    </div>
-    <div class="info-col">
-      <div class="circle top"></div>
-      <div class="circle bottom"></div>
-      <p class="event-title">
-        SOOBIN LIVE CONCERT: ALL-ROUNDER THE FINAL
-      </p>
-      <div class="tags">
-        <span class="tag success">Chưa sử dụng</span>
-        <span class="tag ticket">Vé điện tử</span>
-      </div>
-      <p class="detail-line">
-        <span class="icon">🕑</span> 19:00, 29 Tháng 11, 2025
-      </p>
-      <p class="detail-line">
-        <span class="icon">📍</span> Số vé: B982
-      </p>
-      <!-- sell price row (hidden until selected) -->
-        <div class="sell-price-row">
-          <input type="number" class="sell-price-input" min="0" placeholder="Giá bán (VND)" />
-          <div class="sell-price-note">Tối đa: <strong class="orig-price">120000</strong>VND</div>
-          <div class="sell-price-error" aria-live="polite"></div>
+        <div class="gift-wrap">
+          <a class="btn-gift" role="button" aria-label="Tặng vé">Bán vé</a>
         </div>
-    </div>
-  </div>
-</div>
-
-  <div class="gift-wrap">
-  <a class="btn-gift" role="button" href="" aria-label="Tặng vé">Bán vé</a>
-</div>
-        <div class="suggestion-cards">
-        
-        </div>
+        <div class="suggestion-cards"></div>
       </div>
 
       <div class="footer-nav">
@@ -201,118 +258,301 @@
         <span>&#9633;</span>
       </div>
     </div>
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const sellBtn = document.querySelector('.btn-gift');
-  const ticketItems = document.querySelectorAll('.ticket-item');
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+      // --- PIN/OTP/MODAL ELEMENTS ---
+      const pinOverlay = document.querySelector(".pin-overlay");
+      const pinBox = pinOverlay.querySelector(".pin-box");
+      const otpBox = pinOverlay.querySelector(".otp-box");
+      const otpTimerDisplay = pinOverlay.querySelector("#otp-timer");
+      const otpCodeSpans = pinOverlay.querySelectorAll(
+        ".otp-code-display span"
+      );
+      const otpVerifyBtn = pinOverlay.querySelector(".otp-verify-btn");
+      const dotsPin = pinOverlay.querySelectorAll(".pin-dots span");
+      const keypad = pinOverlay.querySelectorAll(".pin-keypad button");
+      const successModal = document.getElementById("successModal");
+      const btnOk = document.getElementById("btnOk");
 
-  // prevent anchors with .ticket-link from navigating (empty href)
-  document.querySelectorAll('a.ticket-link').forEach(a => {
-    a.addEventListener('click', e => e.preventDefault());
-  });
+      let pin = "";
+      const correctPIN = "050904"; // Mã PIN mẫu
+      let otpTimer;
+      let currentOTP = "";
+      let sellingData = []; // Lưu dữ liệu vé đang được chọn để bán
 
-  // populate displayed original prices from data-original-price (robust: avoid NaN)
-  ticketItems.forEach(item => {
-    const origValue = item.dataset.originalPrice;
-    const orig = origValue ? Number(origValue) : 0;
-    const origSpan = item.querySelector('.orig-price');
-    if (origSpan) origSpan.textContent = orig ? orig.toLocaleString('vi-VN') : '—';
-    item.dataset.originalPrice = String(orig);
-  });
+      // --- AUTHENTICATION LOGIC ---
 
-  // stop clicks inside inputs / sell-price-row from bubbling to parent
-  ticketItems.forEach(item => {
-    const inputs = item.querySelectorAll('input, .sell-price-row');
-    inputs.forEach(el => {
-      el.addEventListener('click', e => e.stopPropagation());
-      el.addEventListener('mousedown', e => e.stopPropagation());
-      el.addEventListener('touchstart', e => e.stopPropagation());
-    });
-  });
+      /**
+       * Bắt đầu quá trình xác thực bằng cách hiển thị màn hình PIN.
+       * @param {Array} data - Danh sách các vé đang bán.
+       */
+      function showPINOverlay(data) {
+        sellingData = data; // Lưu dữ liệu vé
 
-  function updateSellState() {
-    let anySelected = false;
-    let allValid = true;
+        // Dừng và xóa bộ đếm cũ nếu có (an toàn)
+        if (otpTimer) clearInterval(otpTimer);
 
-    ticketItems.forEach(item => {
-      const cb = item.querySelector('.ticket-checkbox');
-      const row = item.querySelector('.sell-price-row');
-      const input = item.querySelector('.sell-price-input');
-      const err = item.querySelector('.sell-price-error');
-      const orig = Number(item.dataset.originalPrice || 0);
+        // Đảm bảo chỉ PIN box hiển thị
+        otpBox.classList.add("hidden");
+        pinBox.classList.remove("hidden");
 
-      if (cb && cb.checked) item.classList.add('selected'); else item.classList.remove('selected');
+        // HIỂN THỊ LỚP PHỦ CHUNG
+        pinOverlay.classList.remove("hidden");
 
-      if (cb && cb.checked) {
-        anySelected = true;
-        const val = input && input.value !== '' ? Number(input.value) : NaN;
-        if (!input || isNaN(val)) {
-          allValid = false;
-          if (err) err.textContent = 'Vui lòng nhập giá bán';
-        } else if (orig > 0 && val > orig) {
-          allValid = false;
-          if (err) err.textContent = 'Giá phải nhỏ hơn hoặc bằng ' + orig.toLocaleString('vi-VN') + '₫';
-        } else if (val <= 0) {
-          allValid = false;
-          if (err) err.textContent = 'Giá phải lớn hơn 0';
-        } else {
-          if (err) err.textContent = '';
+        // Đặt lại trạng thái PIN
+        pin = "";
+        dotsPin.forEach((d) => d.classList.remove("filled"));
+      }
+
+      /**
+       * Xử lý đầu vào từ bàn phím số
+       */
+      keypad.forEach((btn) => {
+        btn.onclick = () => {
+          // Chỉ xử lý khi PIN BOX đang hiển thị
+          if (pinBox.classList.contains("hidden")) return;
+
+          const val = btn.textContent;
+
+          if (btn.classList.contains("del")) pin = pin.slice(0, -1);
+          else if (pin.length < 6) pin += val;
+
+          // Cập nhật chấm PIN
+          dotsPin.forEach((d, i) =>
+            d.classList.toggle("filled", i < pin.length)
+          );
+
+          if (pin.length === 6) {
+            if (pin === correctPIN) {
+              // CHUYỂN TỪ PIN SANG OTP
+              pinBox.classList.add("hidden");
+              otpBox.classList.remove("hidden");
+              startOTPCountdown();
+            } else {
+              // Hiệu ứng lỗi PIN sai
+              pin = "";
+              dotsPin.forEach((d) => d.classList.remove("filled"));
+              pinBox.animate(
+                [
+                  { transform: "translateX(-8px)" },
+                  { transform: "translateX(8px)" },
+                  { transform: "translateX(-8px)" },
+                  { transform: "translateX(0)" },
+                ],
+                { duration: 300 }
+              );
+            }
+          }
+        };
+      });
+
+      /**
+       * Logic Đếm ngược và Tạo mã OTP.
+       */
+      function startOTPCountdown() {
+        let timeLeft = 45; // 45 giây đếm ngược
+
+        function generateOTP() {
+          // Mã hóa dữ liệu (ví dụ: mã PIN + thời gian) để tạo OTP duy nhất
+          const base = correctPIN + Date.now().toString();
+          let hash =
+            typeof CryptoJS !== "undefined"
+              ? CryptoJS.SHA256(base).toString().substring(0, 8) // Lấy 8 ký tự đầu
+              : "DEMO" + Math.floor(Math.random() * 9000 + 1000);
+
+          // Tạo mã OTP 8 chữ số từ hash (chỉ lấy số)
+          let otpCode = hash.replace(/\D/g, "").substring(0, 8);
+          while (otpCode.length < 8) {
+            otpCode += Math.floor(Math.random() * 10);
+          }
+
+          otpCodeSpans.forEach((span, index) => {
+            span.textContent = otpCode[index];
+          });
+          currentOTP = otpCode; // Lưu OTP hiện tại
+          return otpCode;
         }
-      } else {
-        if (err) err.textContent = '';
+
+        function updateTimer() {
+          otpTimerDisplay.textContent = timeLeft;
+          if (timeLeft <= 0) {
+            clearInterval(otpTimer);
+            // Tạo OTP mới và bắt đầu lại đếm ngược
+            startOTPCountdown();
+            return; // Ngăn chặn timeLeft-- khi đã hết giờ
+          }
+          timeLeft--;
+        }
+
+        if (otpTimer) clearInterval(otpTimer);
+
+        generateOTP();
+        updateTimer();
+        otpTimer = setInterval(updateTimer, 1000);
       }
-    });
 
-    if (!anySelected || !allValid) {
-      sellBtn.classList.add('disabled');
-      sellBtn.setAttribute('aria-disabled', 'true');
-    } else {
-      sellBtn.classList.remove('disabled');
-      sellBtn.removeAttribute('aria-disabled');
-    }
-  }
+      // --- FORM AND FINAL ACTION LOGIC ---
 
-  // attach listeners
-  ticketItems.forEach(item => {
-    const cb = item.querySelector('.ticket-checkbox');
-    const input = item.querySelector('.sell-price-input');
+      /**
+       * Logic khi nhấn nút "Xác thực" trên màn hình OTP
+       */
+      otpVerifyBtn.onclick = () => {
+        // Chỉ xử lý khi OTP BOX đang hiển thị
+        if (otpBox.classList.contains("hidden")) return;
 
-    if (cb) cb.addEventListener('change', () => updateSellState());
-    if (input) {
-      input.addEventListener('input', () => updateSellState());
-      // ensure focusing input doesn't toggle parent selection
-      input.addEventListener('focus', e => e.stopPropagation());
-    }
-  });
+        // Dừng bộ đếm OTP
+        clearInterval(otpTimer);
 
-  updateSellState();
+        // Đảm bảo ẩn lớp phủ PIN/OTP
+        pinBox.classList.add("hidden");
+        otpBox.classList.add("hidden");
+        pinOverlay.classList.add("hidden");
 
-  sellBtn.addEventListener('click', (e) => {
-    if (sellBtn.classList.contains('disabled')) { e.preventDefault(); return; }
-    const selected = [];
-   ticketItems.forEach(item => {
-  item.addEventListener('click', e => {
-    // Nếu click vào chính item (không phải checkbox), thì không được toggle
-    if (!e.target.classList.contains('ticket-checkbox') &&
-        !e.target.closest('.ticket-checkbox')) {
-      e.stopPropagation();
-    }
-  });
-});
-    ticketItems.forEach(item => {
-      const cb = item.querySelector('.ticket-checkbox');
-      const input = item.querySelector('.sell-price-input');
-      if (cb && cb.checked) {
-        const price = input && input.value !== '' ? Number(input.value) : null;
-        selected.push({ item, price });
-      }
-    });
-    if (selected.length === 0) { alert('Chọn ít nhất 1 vé để bán.'); return; }
-    alert('Gửi yêu cầu bán thành công cho ' + selected.length + ' vé.');
-    location.href = 'chitietve2.html';
-  });
+        // 3. Xử lý logic Gửi yêu cầu Bán (thành công)
+        console.log("Xác thực thành công. Gửi yêu cầu bán vé...");
+        console.log("Vé đang bán:", sellingData, "OTP:", currentOTP);
 
-});
-</script>
+        // 4. Hiển thị thông báo thành công (Custom Modal)
+        successModal.classList.remove("hidden");
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const sellBtn = document.querySelector(".btn-gift");
+        const ticketItems = document.querySelectorAll(".ticket-item");
+
+        // Bổ sung: Ngăn click vào item tổng thể để tránh xung đột
+        ticketItems.forEach((item) => {
+          item.addEventListener("click", (e) => {
+            // Chỉ cho phép click vào checkbox hoặc input
+            if (
+              !e.target.classList.contains("ticket-checkbox") &&
+              !e.target.closest(".ticket-checkbox") &&
+              !e.target.classList.contains("sell-price-input")
+            ) {
+              e.stopPropagation();
+            }
+          });
+        });
+
+        // populate displayed original prices from data-original-price (robust: avoid NaN)
+        ticketItems.forEach((item) => {
+          const origValue = item.dataset.originalPrice;
+          const orig = origValue ? Number(origValue) : 0;
+          const origSpan = item.querySelector(".orig-price");
+          if (origSpan)
+            origSpan.textContent = orig ? orig.toLocaleString("vi-VN") : "—";
+          item.dataset.originalPrice = String(orig);
+        });
+
+        // stop clicks inside inputs / sell-price-row from bubbling to parent
+        ticketItems.forEach((item) => {
+          const inputs = item.querySelectorAll("input, .sell-price-row");
+          inputs.forEach((el) => {
+            el.addEventListener("click", (e) => e.stopPropagation());
+            el.addEventListener("mousedown", (e) => e.stopPropagation());
+            el.addEventListener("touchstart", (e) => e.stopPropagation());
+          });
+        });
+
+        function updateSellState() {
+          let anySelected = false;
+          let allValid = true;
+
+          // *--- FIX LỖI: RESET VÀ POPULATE sellingData ---*
+          sellingData = [];
+
+          ticketItems.forEach((item) => {
+            const cb = item.querySelector(".ticket-checkbox");
+            const input = item.querySelector(".sell-price-input");
+            const err = item.querySelector(".sell-price-error");
+            const orig = Number(item.dataset.originalPrice || 0);
+
+            // Lấy ID vé (được sử dụng khi populating sellingData)
+            const ticketIdElement = item.querySelector(
+              ".detail-line:nth-child(4)"
+            );
+            const ticketId = ticketIdElement
+              ? ticketIdElement.textContent.split(":").pop().trim()
+              : "N/A";
+            // *--------------------------------------------*
+
+            if (cb && cb.checked) item.classList.add("selected");
+            else item.classList.remove("selected");
+
+            if (cb && cb.checked) {
+              anySelected = true;
+              const val =
+                input && input.value !== "" ? Number(input.value) : NaN;
+
+              if (!input || isNaN(val)) {
+                allValid = false;
+                if (err) err.textContent = "Vui lòng nhập giá bán";
+              } else if (orig > 0 && val > orig) {
+                allValid = false;
+                if (err)
+                  err.textContent =
+                    "Giá phải ≤ " + orig.toLocaleString("vi-VN") + "₫";
+              } else if (val <= 0) {
+                allValid = false;
+                if (err) err.textContent = "Giá phải lớn hơn 0";
+              } else {
+                if (err) err.textContent = "";
+                // *--- FIX LỖI: THÊM DỮ LIỆU VÉ HỢP LỆ ---*
+                sellingData.push({
+                  ticketId: ticketId,
+                  originalPrice: orig,
+                  sellingPrice: val,
+                });
+                // *---------------------------------------*
+              }
+            } else {
+              if (err) err.textContent = "";
+            }
+          });
+
+          if (!anySelected || !allValid) {
+            sellBtn.classList.add("disabled");
+            sellBtn.setAttribute("aria-disabled", "true");
+          } else {
+            sellBtn.classList.remove("disabled");
+            sellBtn.removeAttribute("aria-disabled");
+          }
+        }
+
+        // attach listeners
+        ticketItems.forEach((item) => {
+          const cb = item.querySelector(".ticket-checkbox");
+          const input = item.querySelector(".sell-price-input");
+
+          if (cb) cb.addEventListener("change", () => updateSellState());
+          if (input) {
+            input.addEventListener("input", () => updateSellState());
+            // ensure focusing input doesn't toggle parent selection
+            input.addEventListener("focus", (e) => e.stopPropagation());
+          }
+        });
+
+        updateSellState();
+
+        // Gửi yêu cầu bán (Bây giờ sẽ kích hoạt PIN/OTP)
+        sellBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          if (sellBtn.classList.contains("disabled")) {
+            return;
+          }
+
+          // Kiểm tra lại lần cuối (Bây giờ sellingData đã được populate đúng)
+          if (sellingData.length === 0) {
+            console.error(
+              "Lỗi: Không có vé nào được chọn hoặc giá không hợp lệ. Vui lòng kiểm tra lại."
+            );
+            return;
+          }
+
+          // Bắt đầu quá trình xác thực PIN
+          showPINOverlay(sellingData);
+        });
+      });
+    </script>
   </body>
 </html>
